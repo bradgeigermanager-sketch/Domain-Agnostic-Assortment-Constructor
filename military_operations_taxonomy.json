@@ -1,0 +1,575 @@
+{
+  "domain": "military_operations",
+  "version": "2.0.0",
+  "scope_note": "A domain ontology and taxonomy mapping joint force operations, command and control (C2), kinetic and non-kinetic fires, intelligence collection, combat logistics, and theater operational art.",
+  "subjects": {
+    "command_and_control": {
+      "description": "Operational authority, battle management, communications architectures, mission command directives, and staff coordination.",
+      "topics": [
+        "operational_order_dissemination",
+        "rules_of_engagement_delegation",
+        "joint_force_air_component_control",
+        "battlespace_deconfliction",
+        "continuity_of_command"
+      ]
+    },
+    "intelligence_surveillance_reconnaissance": {
+      "description": "Multi-INT collection, sensor-to-shooter pairing, order-of-battle analysis, and target intelligence preparation.",
+      "topics": [
+        "signals_intelligence_collection",
+        "geospatial_imagery_reconnaissance",
+        "electronic_order_of_battle",
+        "battle_damage_assessment",
+        "target_coordinate_mensuration"
+      ]
+    },
+    "maneuver_and_fires": {
+      "description": "Kinetic strike coordination, combined arms maneuver, close air support, air and missile defense, and non-kinetic fires.",
+      "topics": [
+        "suppression_of_enemy_air_defenses",
+        "deep_strike_interdiction",
+        "combined_arms_breaching",
+        "integrated_air_and_missile_defense",
+        "electronic_attack_and_jamming"
+      ]
+    },
+    "operational_logistics": {
+      "description": "Sustainment pipelines, munitions replenishment, combat engineering, medical evacuation, and distribution security.",
+      "topics": [
+        "class_v_ammunition_resupply",
+        "forward_arm_and_refuel_point_ops",
+        "aeromedical_evacuation",
+        "combat_engineer_route_clearance",
+        "contested_logistics_distribution"
+      ]
+    },
+    "force_protection_and_cbrn": {
+      "description": "Threat mitigation, base defense, counter-unmanned systems, chemical/biological defense, and deception operations.",
+      "topics": [
+        "counter_uas_engagement",
+        "cbrn_reconnaissance_and_decon",
+        "perimeter_defense_operations",
+        "military_deception_coordination",
+        "opsec_vulnerability_mitigation"
+      ]
+    }
+  },
+  "slots": {
+    "relationship": {
+      "slot_id": "relationship",
+      "semantic_role": "operational_relation",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["relationship"],
+        "domain_scope": ["military_operations", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "entity": {
+      "slot_id": "entity",
+      "semantic_role": "asset_order_or_operational_element",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["entity"],
+        "domain_scope": ["military_operations", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "target": {
+      "slot_id": "target",
+      "semantic_role": "operational_objective_or_focal_event",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["target"],
+        "domain_scope": ["military_operations", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "operational_phase": {
+      "slot_id": "operational_phase",
+      "semantic_role": "joint_campaign_phase",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["operational_phase"],
+        "domain_scope": ["military_operations", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "echelon": {
+      "slot_id": "echelon",
+      "semantic_role": "command_level",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["echelon"],
+        "domain_scope": ["military_operations", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    }
+  },
+  "templates": [
+    {
+      "template_id": "mil_interrogative_core",
+      "pattern": "What {relationship} {entity:plural} relate to {target} [during {operational_phase}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["operational_phase"]
+    },
+    {
+      "template_id": "mil_echelon_fires_diagnostic",
+      "pattern": "Which {entity:plural} execute a {relationship} task against {target} at {echelon:article}?",
+      "required_slots": ["relationship", "entity", "target", "echelon"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "mil_phased_mission_audit",
+      "pattern": "How do {relationship} {entity:plural} coordinated by {echelon:article} support {target} [in {operational_phase}]?",
+      "required_slots": ["relationship", "entity", "target", "echelon"],
+      "optional_slots": ["operational_phase"]
+    },
+    {
+      "template_id": "mil_effect_synchronization",
+      "pattern": "What {relationship} {entity:plural} produce intended effects on {target} under {operational_phase} conditions?",
+      "required_slots": ["relationship", "entity", "target", "operational_phase"],
+      "optional_slots": []
+    }
+  ],
+  "vocabulary": [
+    {
+      "term_id": "mil_rel_directing",
+      "term": "directing",
+      "type": "relationship",
+      "domain": "military_operations",
+      "subject": "command_and_control",
+      "topic": "operational_order_dissemination",
+      "tags": ["c2", "authoritative", "command"],
+      "inflections": {
+        "adjective": "directive",
+        "noun": "direction"
+      }
+    },
+    {
+      "term_id": "mil_rel_neutralizing",
+      "term": "neutralizing",
+      "type": "relationship",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "suppression_of_enemy_air_defenses",
+      "tags": ["kinetic", "fires", "defeat"],
+      "inflections": {
+        "adjective": "neutralizing",
+        "noun": "neutralization"
+      }
+    },
+    {
+      "term_id": "mil_rel_interdicting",
+      "term": "interdicting",
+      "type": "relationship",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "deep_strike_interdiction",
+      "tags": ["fires", "deep_operations", "strike"],
+      "inflections": {
+        "adjective": "interdictive",
+        "noun": "interdiction"
+      }
+    },
+    {
+      "term_id": "mil_rel_reconnoitering",
+      "term": "reconnoitering",
+      "type": "relationship",
+      "domain": "military_operations",
+      "subject": "intelligence_surveillance_reconnaissance",
+      "topic": "geospatial_imagery_reconnaissance",
+      "tags": ["isr", "collection", "intelligence"],
+      "inflections": {
+        "adjective": "reconnaissance",
+        "noun": "reconnaissance"
+      }
+    },
+    {
+      "term_id": "mil_rel_resupplying",
+      "term": "resupplying",
+      "type": "relationship",
+      "domain": "military_operations",
+      "subject": "operational_logistics",
+      "topic": "class_v_ammunition_resupply",
+      "tags": ["logistics", "sustainment", "support"],
+      "inflections": {
+        "adjective": "resupply",
+        "noun": "resupply"
+      }
+    },
+    {
+      "term_id": "mil_rel_deconflicting",
+      "term": "deconflicting",
+      "type": "relationship",
+      "domain": "military_operations",
+      "subject": "command_and_control",
+      "topic": "battlespace_deconfliction",
+      "tags": ["airspace", "fires", "coordination"],
+      "inflections": {
+        "adjective": "deconflicting",
+        "noun": "deconfliction"
+      }
+    },
+    {
+      "term_id": "mil_rel_jamming",
+      "term": "electronic-jamming",
+      "type": "relationship",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "electronic_attack_and_jamming",
+      "tags": ["non_kinetic", "electronic_warfare", "spectrum"],
+      "inflections": {
+        "adjective": "electronic-jamming",
+        "noun": "electronic jamming"
+      }
+    },
+    {
+      "term_id": "mil_rel_screening",
+      "term": "screening",
+      "type": "relationship",
+      "domain": "military_operations",
+      "subject": "force_protection_and_cbrn",
+      "topic": "perimeter_defense_operations",
+      "tags": ["security", "maneuver", "protective"],
+      "inflections": {
+        "adjective": "screening",
+        "noun": "screen"
+      }
+    },
+    {
+      "term_id": "mil_ent_air_tasking_order",
+      "term": "air tasking order",
+      "type": "entity",
+      "domain": "military_operations",
+      "subject": "command_and_control",
+      "topic": "joint_force_air_component_control",
+      "tags": ["c2_document", "air_operations", "directive"],
+      "inflections": {
+        "singular": "air tasking order",
+        "plural": "air tasking orders"
+      }
+    },
+    {
+      "term_id": "mil_ent_strike_package",
+      "term": "multirole strike package",
+      "type": "entity",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "deep_strike_interdiction",
+      "tags": ["aviation", "tactical_unit", "fires"],
+      "inflections": {
+        "singular": "multirole strike package",
+        "plural": "multirole strike packages"
+      }
+    },
+    {
+      "term_id": "mil_ent_uas_swarm",
+      "term": "autonomous reconnaissance UAS swarm",
+      "type": "entity",
+      "domain": "military_operations",
+      "subject": "intelligence_surveillance_reconnaissance",
+      "topic": "geospatial_imagery_reconnaissance",
+      "tags": ["unmanned", "isr", "sensor"],
+      "inflections": {
+        "singular": "autonomous reconnaissance UAS swarm",
+        "plural": "autonomous reconnaissance UAS swarms"
+      }
+    },
+    {
+      "term_id": "mil_ent_fire_direction_center",
+      "term": "artillery fire direction center",
+      "type": "entity",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "combined_arms_breaching",
+      "tags": ["artillery", "c2_node", "fires"],
+      "inflections": {
+        "singular": "artillery fire direction center",
+        "plural": "artillery fire direction centers"
+      }
+    },
+    {
+      "term_id": "mil_ent_farp",
+      "term": "forward arming and refueling point",
+      "type": "entity",
+      "domain": "military_operations",
+      "subject": "operational_logistics",
+      "topic": "forward_arm_and_refuel_point_ops",
+      "tags": ["logistics_node", "aviation", "sustainment"],
+      "inflections": {
+        "singular": "forward arming and refueling point",
+        "plural": "forward arming and refueling points"
+      }
+    },
+    {
+      "term_id": "mil_ent_ew_pod",
+      "term": "airborne electronic attack pod",
+      "type": "entity",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "electronic_attack_and_jamming",
+      "tags": ["electronic_warfare", "payload", "non_kinetic"],
+      "inflections": {
+        "singular": "airborne electronic attack pod",
+        "plural": "airborne electronic attack pods"
+      }
+    },
+    {
+      "term_id": "mil_ent_cuas_battery",
+      "term": "counter-UAS directed energy battery",
+      "type": "entity",
+      "domain": "military_operations",
+      "subject": "force_protection_and_cbrn",
+      "topic": "counter_uas_engagement",
+      "tags": ["air_defense", "directed_energy", "force_protection"],
+      "inflections": {
+        "singular": "counter-UAS directed energy battery",
+        "plural": "counter-UAS directed energy batteries"
+      }
+    },
+    {
+      "term_id": "mil_ent_bda_assessment",
+      "term": "battle damage assessment report",
+      "type": "entity",
+      "domain": "military_operations",
+      "subject": "intelligence_surveillance_reconnaissance",
+      "topic": "battle_damage_assessment",
+      "tags": ["intelligence_report", "post_strike", "target"],
+      "inflections": {
+        "singular": "battle damage assessment report",
+        "plural": "battle damage assessment reports"
+      }
+    },
+    {
+      "term_id": "mil_tgt_integrated_air_defense",
+      "term": "an adversary integrated air defense system (IADS)",
+      "type": "target",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "suppression_of_enemy_air_defenses",
+      "tags": ["threat_system", "anti_access", "high_value"]
+    },
+    {
+      "term_id": "mil_tgt_c2_bunker",
+      "term": "a hardened underground command facility",
+      "type": "target",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "deep_strike_interdiction",
+      "tags": ["hardened_target", "strategic_c2", "penetration"]
+    },
+    {
+      "term_id": "mil_tgt_bridgehead",
+      "term": "a contested wet-gap crossing point",
+      "type": "target",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "combined_arms_breaching",
+      "tags": ["geographic_chokepoint", "breach", "ground_axis"]
+    },
+    {
+      "term_id": "mil_tgt_supply_depot",
+      "term": "a theater ammunition supply point",
+      "type": "target",
+      "domain": "military_operations",
+      "subject": "operational_logistics",
+      "topic": "contested_logistics_distribution",
+      "tags": ["logistics_installation", "sustainment", "vulnerable"]
+    },
+    {
+      "term_id": "mil_tgt_radar_emitter",
+      "term": "an early-warning acquisition radar emitter",
+      "type": "target",
+      "domain": "military_operations",
+      "subject": "intelligence_surveillance_reconnaissance",
+      "topic": "electronic_order_of_battle",
+      "tags": ["electronic_emitter", "sensor_node", "sead"]
+    },
+    {
+      "term_id": "mil_tgt_staging_area",
+      "term": "an armor staging and assembly area",
+      "type": "target",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "deep_strike_interdiction",
+      "tags": ["concentrated_force", "counter_mobility", "tactical"]
+    },
+    {
+      "term_id": "mil_ph_shape",
+      "term": "Phase 0/I shaping operations",
+      "type": "operational_phase",
+      "domain": "military_operations",
+      "subject": "command_and_control",
+      "topic": "rules_of_engagement_delegation",
+      "tags": ["pre_hostility", "deterrence", "timeline"]
+    },
+    {
+      "term_id": "mil_ph_deter",
+      "term": "Phase II seize the initiative operations",
+      "type": "operational_phase",
+      "domain": "military_operations",
+      "subject": "command_and_control",
+      "topic": "operational_order_dissemination",
+      "tags": ["hostilities_opening", "initiative", "timeline"]
+    },
+    {
+      "term_id": "mil_ph_dominate",
+      "term": "Phase III decisive domination operations",
+      "type": "operational_phase",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "deep_strike_interdiction",
+      "tags": ["full_spectrum", "kinetic_peak", "timeline"]
+    },
+    {
+      "term_id": "mil_ph_stabilize",
+      "term": "Phase IV stability and transition operations",
+      "type": "operational_phase",
+      "domain": "military_operations",
+      "subject": "command_and_control",
+      "topic": "continuity_of_command",
+      "tags": ["post_kinetic", "consolidation", "timeline"]
+    },
+    {
+      "term_id": "mil_ech_joint_force",
+      "term": "Joint Task Force Headquarters",
+      "type": "echelon",
+      "domain": "military_operations",
+      "subject": "command_and_control",
+      "topic": "joint_force_air_component_control",
+      "tags": ["theater", "operational_command"],
+      "inflections": {
+        "singular": "Joint Task Force Headquarters",
+        "article": "the Joint Task Force Headquarters"
+      }
+    },
+    {
+      "term_id": "mil_ech_corps",
+      "term": "Corps Tactical Operations Center",
+      "type": "echelon",
+      "domain": "military_operations",
+      "subject": "command_and_control",
+      "topic": "battlespace_deconfliction",
+      "tags": ["tactical_echelon", "land_component"],
+      "inflections": {
+        "singular": "Corps Tactical Operations Center",
+        "article": "the Corps Tactical Operations Center"
+      }
+    },
+    {
+      "term_id": "mil_ech_division",
+      "term": "Division Artillery Command",
+      "type": "echelon",
+      "domain": "military_operations",
+      "subject": "maneuver_and_fires",
+      "topic": "combined_arms_breaching",
+      "tags": ["tactical_echelon", "fires_command"],
+      "inflections": {
+        "singular": "Division Artillery Command",
+        "article": "the Division Artillery Command"
+      }
+    },
+    {
+      "term_id": "mil_ech_air_wing",
+      "term": "Air Expeditionary Wing",
+      "type": "echelon",
+      "domain": "military_operations",
+      "subject": "command_and_control",
+      "topic": "joint_force_air_component_control",
+      "tags": ["tactical_echelon", "air_component"],
+      "inflections": {
+        "singular": "Air Expeditionary Wing",
+        "article": "an Air Expeditionary Wing"
+      }
+    }
+  ],
+  "constraints": [
+    {
+      "type": "domain_alignment"
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "mil_rel_directing"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "mil_ent_air_tasking_order"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "mil_rel_jamming"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "mil_ent_ew_pod"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "mil_rel_resupplying"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "mil_ent_farp"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "mil_rel_jamming"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "mil_tgt_integrated_air_defense",
+          "mil_tgt_radar_emitter"
+        ]
+      }
+    },
+    {
+      "type": "excludes",
+      "if": {
+        "slot": "relationship",
+        "value": "mil_rel_resupplying"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "mil_tgt_integrated_air_defense",
+          "mil_tgt_radar_emitter"
+        ]
+      }
+    }
+  ]
+}
+

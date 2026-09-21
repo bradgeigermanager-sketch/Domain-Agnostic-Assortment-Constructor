@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GeneralizedSlotTaxonomySchema",
+  "version": "2.0.0",
+  "type": "object",
+  "required": ["version", "domains", "slots", "templates"],
+  "properties": {
+    "version": { "type": "string" },
+    "domains": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "description": { "type": "string" },
+          "subjects": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "topics": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "slots": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["slot_id", "acceptor"],
+        "properties": {
+          "slot_id": { "type": "string" },
+          "semantic_role": { "type": "string" },
+          "default_cardinality": { "type": "string", "enum": ["single", "list"] },
+          "acceptor": {
+            "type": "object",
+            "required": ["allowed_types"],
+            "properties": {
+              "allowed_types": { "type": "array", "items": { "type": "string" } },
+              "domain_scope": { "type": "array", "items": { "type": "string" } },
+              "subject_scope": { "type": "array", "items": { "type": "string" } },
+              "topic_scope": { "type": "array", "items": { "type": "string" } },
+              "required_tags": { "type": "array", "items": { "type": "string" } },
+              "excluded_tags": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "vocabulary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["term_id", "term", "type"],
+        "properties": {
+          "term_id": { "type": "string" },
+          "term": { "type": "string" },
+          "type": { "type": "string" },
+          "domain": { "type": "string" },
+          "subject": { "type": "string" },
+          "topic": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "inflections": {
+            "type": "object",
+            "properties": {
+              "plural": { "type": "string" },
+              "singular": { "type": "string" },
+              "gerund": { "type": "string" },
+              "article": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["template_id", "pattern", "required_slots"],
+        "properties": {
+          "template_id": { "type": "string" },
+          "pattern": { "type": "string" },
+          "required_slots": { "type": "array", "items": { "type": "string" } },
+          "optional_slots": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}
+

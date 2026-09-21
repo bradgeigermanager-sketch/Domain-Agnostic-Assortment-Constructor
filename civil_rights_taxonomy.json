@@ -1,0 +1,512 @@
+{
+  "domain": "civil_rights",
+  "version": "2.0.0",
+  "scope_note": "A domain ontology and taxonomy mapping constitutional deprivations, statutory civil rights enforcement, state-action doctrine, systemic institutional discrimination, equal protection scrutiny, remedial injunctions, and federal oversight under U.S. Code Titles 18 and 42.",
+  "subjects": {
+    "constitutional_deprivations_and_state_action": {
+      "description": "Deprivations of constitutional rights under color of law, police misconduct, Fourth and Fourteenth Amendment violations, and qualified immunity inquiries.",
+      "topics": [
+        "color_of_law_nexus",
+        "excessive_force_and_seizure",
+        "due_process_deprivations",
+        "qualified_immunity_overcoming",
+        "deliberate_indifference_in_custody"
+      ]
+    },
+    "equal_protection_and_antidiscrimination": {
+      "description": "Disparate treatment, disparate impact, systemic exclusion, and discrimination across employment, housing, education, and public accommodations.",
+      "topics": [
+        "disparate_impact_analysis",
+        "disparate_treatment_proof",
+        "protected_class_burden_shifting",
+        "reasonable_accommodation_denials",
+        "retaliation_and_whistleblower_interference"
+      ]
+    },
+    "voting_rights_and_electoral_access": {
+      "description": "Access to the franchise, vote dilution, redistricting challenges, language minority accommodations, and voting administration barriers.",
+      "topics": [
+        "vote_dilution_and_gerrymandering",
+        "voter_suppression_and_purging",
+        "preclearance_and_special_coverage",
+        "accessibility_barrier_identification",
+        "election_worker_intimidation"
+      ]
+    },
+    "institutional_reform_and_consent_decrees": {
+      "description": "Pattern-or-practice investigations, systemic injunctive relief, court-appointed monitoring teams, and municipal compliance mandates.",
+      "topics": [
+        "pattern_or_practice_investigation",
+        "independent_monitoring_audits",
+        "consent_decree_compliance",
+        "policy_reform_and_training_remediation",
+        "injunctive_oversight_termination"
+      ]
+    },
+    "statutory_remedies_and_liability": {
+      "description": "Civil liability frameworks under Section 1983, Monell municipal liability, statutory fee-shifting, and criminal civil rights prosecutions.",
+      "topics": [
+        "monell_custom_or_policy_attribution",
+        "supervisory_liability_frameworks",
+        "section_241_and_242_criminal_prosecution",
+        "attorneys_fees_and_remedies",
+        "declaratory_and_preliminary_relief"
+      ]
+    }
+  },
+  "slots": {
+    "relationship": {
+      "slot_id": "relationship",
+      "semantic_role": "civil_rights_action_or_violation_relation",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["relationship"],
+        "domain_scope": ["civil_rights", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "entity": {
+      "slot_id": "entity",
+      "semantic_role": "deprivation_evidence_or_remedial_instrument",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["entity"],
+        "domain_scope": ["civil_rights", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "target": {
+      "slot_id": "target",
+      "semantic_role": "civil_rights_harm_statute_or_institution",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["target"],
+        "domain_scope": ["civil_rights", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "scrutiny_standard": {
+      "slot_id": "scrutiny_standard",
+      "semantic_role": "equal_protection_or_constitutional_tier",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["scrutiny_standard"],
+        "domain_scope": ["civil_rights", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "statutory_basis": {
+      "slot_id": "statutory_basis",
+      "semantic_role": "enabling_statute_or_amendment",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["statutory_basis"],
+        "domain_scope": ["civil_rights", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    }
+  },
+  "templates": [
+    {
+      "template_id": "cr_interrogative_core",
+      "pattern": "What {relationship} {entity:plural} relate to {target} [under {statutory_basis}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["statutory_basis"]
+    },
+    {
+      "template_id": "cr_scrutiny_diagnostic",
+      "pattern": "Which {entity:plural} establish a {relationship} practice regarding {target} subject to {scrutiny_standard}?",
+      "required_slots": ["relationship", "entity", "target", "scrutiny_standard"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "cr_remedial_compliance_audit",
+      "pattern": "How do {relationship} {entity:plural} redress {target} within the scope of {statutory_basis}?",
+      "required_slots": ["relationship", "entity", "target", "statutory_basis"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "cr_constitutional_liability_evaluation",
+      "pattern": "What {relationship} {entity:plural} substantiate liability for {target} [evaluated under {scrutiny_standard}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["scrutiny_standard"]
+    }
+  ],
+  "vocabulary": [
+    {
+      "term_id": "cr_rel_depriving",
+      "term": "depriving",
+      "type": "relationship",
+      "domain": "civil_rights",
+      "subject": "constitutional_deprivations_and_state_action",
+      "topic": "due_process_deprivations",
+      "tags": ["constitutional", "state_action", "harm"],
+      "inflections": {
+        "adjective": "deprivation-related",
+        "noun": "deprivation"
+      }
+    },
+    {
+      "term_id": "cr_rel_discriminating",
+      "term": "discriminating",
+      "type": "relationship",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "disparate_treatment_proof",
+      "tags": ["animus", "disparate_treatment", "unlawful"],
+      "inflections": {
+        "adjective": "discriminatory",
+        "noun": "discrimination"
+      }
+    },
+    {
+      "term_id": "cr_rel_retaliating",
+      "term": "retaliating",
+      "type": "relationship",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "retaliation_and_whistleblower_interference",
+      "tags": ["reprisal", "whistleblower", "first_amendment"],
+      "inflections": {
+        "adjective": "retaliatory",
+        "noun": "retaliation"
+      }
+    },
+    {
+      "term_id": "cr_rel_suppressing_vote",
+      "term": "vote-suppressing",
+      "type": "relationship",
+      "domain": "civil_rights",
+      "subject": "voting_rights_and_electoral_access",
+      "topic": "voter_suppression_and_purging",
+      "tags": ["franchise", "electoral", "barrier"],
+      "inflections": {
+        "adjective": "vote-suppressing",
+        "noun": "voter suppression"
+      }
+    },
+    {
+      "term_id": "cr_rel_remediating",
+      "term": "remediating",
+      "type": "relationship",
+      "domain": "civil_rights",
+      "subject": "institutional_reform_and_consent_decrees",
+      "topic": "policy_reform_and_training_remediation",
+      "tags": ["corrective", "equitable", "compliance"],
+      "inflections": {
+        "adjective": "remedial",
+        "noun": "remediation"
+      }
+    },
+    {
+      "term_id": "cr_rel_monitoring",
+      "term": "compliance-monitoring",
+      "type": "relationship",
+      "domain": "civil_rights",
+      "subject": "institutional_reform_and_consent_decrees",
+      "topic": "independent_monitoring_audits",
+      "tags": ["oversight", "consent_decree", "auditing"],
+      "inflections": {
+        "adjective": "monitoring-oriented",
+        "noun": "compliance monitoring"
+      }
+    },
+    {
+      "term_id": "cr_rel_custom_authorizing",
+      "term": "custom-authorizing",
+      "type": "relationship",
+      "domain": "civil_rights",
+      "subject": "statutory_remedies_and_liability",
+      "topic": "monell_custom_or_policy_attribution",
+      "tags": ["monell", "municipal", "policy"],
+      "inflections": {
+        "adjective": "policy-establishing",
+        "noun": "policy authorization"
+      }
+    },
+    {
+      "term_id": "cr_ent_pattern_investigation_report",
+      "term": "pattern-or-practice findings letter",
+      "type": "entity",
+      "domain": "civil_rights",
+      "subject": "institutional_reform_and_consent_decrees",
+      "topic": "pattern_or_practice_investigation",
+      "tags": ["doj", "investigative_finding", "formal_record"],
+      "inflections": {
+        "singular": "pattern-or-practice findings letter",
+        "plural": "pattern-or-practice findings letters"
+      }
+    },
+    {
+      "term_id": "cr_ent_consent_decree",
+      "term": "judicially enforceable consent decree",
+      "type": "entity",
+      "domain": "civil_rights",
+      "subject": "institutional_reform_and_consent_decrees",
+      "topic": "consent_decree_compliance",
+      "tags": ["injunction", "judicial_order", "remedial"],
+      "inflections": {
+        "singular": "judicially enforceable consent decree",
+        "plural": "judicially enforceable consent decrees"
+      }
+    },
+    {
+      "term_id": "cr_ent_statistical_disparity_study",
+      "term": "statistical disparity regression analysis",
+      "type": "entity",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "disparate_impact_analysis",
+      "tags": ["empirical", "expert_study", "disparate_impact"],
+      "inflections": {
+        "singular": "statistical disparity regression analysis",
+        "plural": "statistical disparity regression analyses"
+      }
+    },
+    {
+      "term_id": "cr_ent_use_of_force_log",
+      "term": "internal affairs use-of-force telemetry report",
+      "type": "entity",
+      "domain": "civil_rights",
+      "subject": "constitutional_deprivations_and_state_action",
+      "topic": "excessive_force_and_seizure",
+      "tags": ["police_oversight", "internal_record", "telemetry"],
+      "inflections": {
+        "singular": "internal affairs use-of-force telemetry report",
+        "plural": "internal affairs use-of-force telemetry reports"
+      }
+    },
+    {
+      "term_id": "cr_ent_voter_registration_purge_list",
+      "term": "voter registration purge audit log",
+      "type": "entity",
+      "domain": "civil_rights",
+      "subject": "voting_rights_and_electoral_access",
+      "topic": "voter_suppression_and_purging",
+      "tags": ["elections", "data_log", "franchise"],
+      "inflections": {
+        "singular": "voter registration purge audit log",
+        "plural": "voter registration purge audit logs"
+      }
+    },
+    {
+      "term_id": "cr_ent_accommodation_denial_record",
+      "term": "written reasonable accommodation denial notice",
+      "type": "entity",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "reasonable_accommodation_denials",
+      "tags": ["disability", "written_record", "denial"],
+      "inflections": {
+        "singular": "written reasonable accommodation denial notice",
+        "plural": "written reasonable accommodation denial notices"
+      }
+    },
+    {
+      "term_id": "cr_ent_eeoc_charge",
+      "term": "formal EEOC charge of discrimination",
+      "type": "entity",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "protected_class_burden_shifting",
+      "tags": ["administrative_filing", "exhaustion", "statutory"],
+      "inflections": {
+        "singular": "formal EEOC charge of discrimination",
+        "plural": "formal EEOC charges of discrimination"
+      }
+    },
+    {
+      "term_id": "cr_tgt_municipal_police_department",
+      "term": "a municipal law enforcement agency",
+      "type": "target",
+      "domain": "civil_rights",
+      "subject": "institutional_reform_and_consent_decrees",
+      "topic": "pattern_or_practice_investigation",
+      "tags": ["agency", "monell", "state_actor"]
+    },
+    {
+      "term_id": "cr_tgt_state_correctional_facility",
+      "term": "a state correctional institution health care delivery system",
+      "type": "target",
+      "domain": "civil_rights",
+      "subject": "constitutional_deprivations_and_state_action",
+      "topic": "deliberate_indifference_in_custody",
+      "tags": ["eighth_amendment", "custodial_facility", "healthcare"]
+    },
+    {
+      "term_id": "cr_tgt_redistricting_plan",
+      "term": "a decennial legislative redistricting map",
+      "type": "target",
+      "domain": "civil_rights",
+      "subject": "voting_rights_and_electoral_access",
+      "topic": "vote_dilution_and_gerrymandering",
+      "tags": ["redistricting", "section_2", "voting"]
+    },
+    {
+      "term_id": "cr_tgt_housing_authority",
+      "term": "a regional public housing authority screening protocol",
+      "type": "target",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "disparate_impact_analysis",
+      "tags": ["fair_housing", "exclusionary", "municipal"]
+    },
+    {
+      "term_id": "cr_tgt_individual_officer_conduct",
+      "term": "a warrantless custodial search conduct pattern",
+      "type": "target",
+      "domain": "civil_rights",
+      "subject": "constitutional_deprivations_and_state_action",
+      "topic": "color_of_law_nexus",
+      "tags": ["fourth_amendment", "state_action", "individual_liability"]
+    },
+    {
+      "term_id": "cr_scr_strict_scrutiny",
+      "term": "strict scrutiny",
+      "type": "scrutiny_standard",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "disparate_treatment_proof",
+      "tags": ["equal_protection", "suspect_classification", "tier_one"]
+    },
+    {
+      "term_id": "cr_scr_intermediate_scrutiny",
+      "term": "intermediate scrutiny",
+      "type": "scrutiny_standard",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "disparate_treatment_proof",
+      "tags": ["equal_protection", "quasi_suspect", "tier_two"]
+    },
+    {
+      "term_id": "cr_scr_rational_basis",
+      "term": "rational basis review",
+      "type": "scrutiny_standard",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "disparate_treatment_proof",
+      "tags": ["equal_protection", "default_standard", "tier_three"]
+    },
+    {
+      "term_id": "cr_sb_section_1983",
+      "term": "42 U.S.C. Section 1983",
+      "type": "statutory_basis",
+      "domain": "civil_rights",
+      "subject": "statutory_remedies_and_liability",
+      "topic": "monell_custom_or_policy_attribution",
+      "tags": ["statutory", "federal", "constitutional_tort"]
+    },
+    {
+      "term_id": "cr_sb_title_vii",
+      "term": "Title VII of the Civil Rights Act of 1964",
+      "type": "statutory_basis",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "protected_class_burden_shifting",
+      "tags": ["statutory", "employment", "federal"]
+    },
+    {
+      "term_id": "cr_sb_voting_rights_act",
+      "term": "Section 2 of the Voting Rights Act of 1965",
+      "type": "statutory_basis",
+      "domain": "civil_rights",
+      "subject": "voting_rights_and_electoral_access",
+      "topic": "vote_dilution_and_gerrymandering",
+      "tags": ["statutory", "electoral", "federal"]
+    },
+    {
+      "term_id": "cr_sb_americans_with_disabilities_act",
+      "term": "Title II of the Americans with Disabilities Act",
+      "type": "statutory_basis",
+      "domain": "civil_rights",
+      "subject": "equal_protection_and_antidiscrimination",
+      "topic": "reasonable_accommodation_denials",
+      "tags": ["statutory", "disability", "federal"]
+    },
+    {
+      "term_id": "cr_sb_section_14141_pattern_or_practice",
+      "term": "34 U.S.C. Section 12601 (formerly 42 U.S.C. Section 14141)",
+      "type": "statutory_basis",
+      "domain": "civil_rights",
+      "subject": "institutional_reform_and_consent_decrees",
+      "topic": "pattern_or_practice_investigation",
+      "tags": ["statutory", "pattern_or_practice", "doj"]
+    }
+  ],
+  "constraints": [
+    {
+      "type": "domain_alignment"
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "cr_rel_monitoring"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "cr_ent_consent_decree",
+          "cr_ent_pattern_investigation_report"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "cr_rel_suppressing_vote"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "cr_tgt_redistricting_plan"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "cr_rel_custom_authorizing"
+      },
+      "then": {
+        "slot": "statutory_basis",
+        "values": [
+          "cr_sb_section_1983",
+          "cr_sb_section_14141_pattern_or_practice"
+        ]
+      }
+    },
+    {
+      "type": "excludes",
+      "if": {
+        "slot": "relationship",
+        "value": "cr_rel_remediating"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "cr_ent_voter_registration_purge_list",
+          "cr_ent_accommodation_denial_record"
+        ]
+      }
+    }
+  ]
+}
+

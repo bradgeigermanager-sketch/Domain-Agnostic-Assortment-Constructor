@@ -1,0 +1,587 @@
+{
+  "domain": "criminal_justice",
+  "version": "2.0.0",
+  "scope_note": "A domain ontology and taxonomy mapping criminal offenses, investigative enforcement, custody and booking, evidentiary forensics, prosecutorial charging, constitutional defenses, and correctional supervision.",
+  "subjects": {
+    "investigation_and_policing": {
+      "description": "Field stops, searches, seizures, surveillance, suspect interrogations, and initial incident reporting.",
+      "topics": [
+        "traffic_and_terry_stops",
+        "search_and_seizure_execution",
+        "custodial_interrogation",
+        "undercover_surveillance",
+        "incident_report_generation"
+      ]
+    },
+    "substantive_criminal_law": {
+      "description": "Statutory elements, mens rea classifications, actus reus, inchoate offenses, and affirmative defenses.",
+      "topics": [
+        "element_satisfaction",
+        "mens_rea_attribution",
+        "inchoate_conspiracy_and_attempt",
+        "affirmative_justifications",
+        "felony_enhancements"
+      ]
+    },
+    "custody_and_booking": {
+      "description": "Arrest, physical booking, biometric intake, bail determinations, and detention management.",
+      "topics": [
+        "warrantless_probable_cause_arrest",
+        "biometric_and_intake_processing",
+        "pretrial_risk_assessment",
+        "bail_and_bond_conditions",
+        "facility_intake_searches"
+      ]
+    },
+    "forensics_and_chain_of_custody": {
+      "description": "Collection, custody logging, laboratory testing, ballistics, toxicology, and digital forensics.",
+      "topics": [
+        "physical_evidence_logging",
+        "chain_of_custody_transfers",
+        "laboratory_toxicology_and_dna",
+        "ballistics_and_toolmark_matching",
+        "digital_device_extractions"
+      ]
+    },
+    "adjudication_and_sentencing": {
+      "description": "Grand jury proceedings, indictments, preliminary hearings, plea negotiations, trials, and sentencing.",
+      "topics": [
+        "grand_jury_indictments",
+        "probable_cause_hearings",
+        "plea_bargaining_allocutions",
+        "evidentiary_suppression_hearings",
+        "statutory_sentencing_guidelines"
+      ]
+    },
+    "corrections_and_parole": {
+      "description": "Institutional confinement, probationary supervision, community monitoring, and revocation hearings.",
+      "topics": [
+        "probationary_compliance_auditing",
+        "parole_revocation_proceedings",
+        "community_supervision_conditions",
+        "rehabilitative_mandates",
+        "sentence_credit_calculations"
+      ]
+    }
+  },
+  "slots": {
+    "relationship": {
+      "slot_id": "relationship",
+      "semantic_role": "criminological_or_enforcement_relation",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["relationship"],
+        "domain_scope": ["criminal_justice", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "entity": {
+      "slot_id": "entity",
+      "semantic_role": "enforcement_action_record_or_instrument",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["entity"],
+        "domain_scope": ["criminal_justice", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "target": {
+      "slot_id": "target",
+      "semantic_role": "offense_anchor_or_subject",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["target"],
+        "domain_scope": ["criminal_justice", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "procedural_stage": {
+      "slot_id": "procedural_stage",
+      "semantic_role": "criminal_justice_timeline_stage",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["procedural_stage"],
+        "domain_scope": ["criminal_justice", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "evidentiary_threshold": {
+      "slot_id": "evidentiary_threshold",
+      "semantic_role": "burden_or_quantum_of_proof",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["evidentiary_threshold"],
+        "domain_scope": ["criminal_justice", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    }
+  },
+  "templates": [
+    {
+      "template_id": "cj_interrogative_core",
+      "pattern": "What {relationship} {entity:plural} relate to {target} [during {procedural_stage}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["procedural_stage"]
+    },
+    {
+      "template_id": "cj_enforcement_threshold_diagnostic",
+      "pattern": "Which {entity:plural} establish a {relationship} nexus regarding {target} under {evidentiary_threshold}?",
+      "required_slots": ["relationship", "entity", "target", "evidentiary_threshold"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "cj_suppression_inquiry",
+      "pattern": "How do {relationship} {entity:plural} affect the prosecution of {target} [at {procedural_stage}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["procedural_stage"]
+    },
+    {
+      "template_id": "cj_proof_standard_assessment",
+      "pattern": "What {relationship} {entity:plural} meet the threshold of {evidentiary_threshold} in connection with {target}?",
+      "required_slots": ["relationship", "entity", "target", "evidentiary_threshold"],
+      "optional_slots": []
+    }
+  ],
+  "vocabulary": [
+    {
+      "term_id": "cj_rel_element_satisfying",
+      "term": "element-satisfying",
+      "type": "relationship",
+      "domain": "criminal_justice",
+      "subject": "substantive_criminal_law",
+      "topic": "element_satisfaction",
+      "tags": ["statutory", "substantive", "corpus_delicti"],
+      "inflections": {
+        "adjective": "element-satisfying",
+        "noun": "element satisfaction"
+      }
+    },
+    {
+      "term_id": "cj_rel_investigative_seizing",
+      "term": "seizing",
+      "type": "relationship",
+      "domain": "criminal_justice",
+      "subject": "investigation_and_policing",
+      "topic": "search_and_seizure_execution",
+      "tags": ["fourth_amendment", "physical", "enforcement"],
+      "inflections": {
+        "adjective": "seized",
+        "noun": "seizure"
+      }
+    },
+    {
+      "term_id": "cj_rel_custodial_interrogating",
+      "term": "interrogating",
+      "type": "relationship",
+      "domain": "criminal_justice",
+      "subject": "investigation_and_policing",
+      "topic": "custodial_interrogation",
+      "tags": ["fifth_amendment", "statement", "miranda"],
+      "inflections": {
+        "adjective": "interrogative",
+        "noun": "custodial interrogation"
+      }
+    },
+    {
+      "term_id": "cj_rel_probable_cause_arresting",
+      "term": "arresting",
+      "type": "relationship",
+      "domain": "criminal_justice",
+      "subject": "custody_and_booking",
+      "topic": "warrantless_probable_cause_arrest",
+      "tags": ["custody", "liberty_restriction", "booking"],
+      "inflections": {
+        "adjective": "arrest-related",
+        "noun": "arrest"
+      }
+    },
+    {
+      "term_id": "cj_rel_chain_preserving",
+      "term": "chain-of-custody-preserving",
+      "type": "relationship",
+      "domain": "criminal_justice",
+      "subject": "forensics_and_chain_of_custody",
+      "topic": "chain_of_custody_transfers",
+      "tags": ["evidentiary", "authentication", "forensic"],
+      "inflections": {
+        "adjective": "chain-preserving",
+        "noun": "chain-of-custody preservation"
+      }
+    },
+    {
+      "term_id": "cj_rel_probation_revoking",
+      "term": "revoking",
+      "type": "relationship",
+      "domain": "criminal_justice",
+      "subject": "corrections_and_parole",
+      "topic": "parole_revocation_proceedings",
+      "tags": ["post_conviction", "disciplinary", "sanction"],
+      "inflections": {
+        "adjective": "revocatory",
+        "noun": "supervision revocation"
+      }
+    },
+    {
+      "term_id": "cj_rel_evidence_suppressing",
+      "term": "suppressing",
+      "type": "relationship",
+      "domain": "criminal_justice",
+      "subject": "adjudication_and_sentencing",
+      "topic": "evidentiary_suppression_hearings",
+      "tags": ["exclusionary_rule", "constitutional", "defense"],
+      "inflections": {
+        "adjective": "suppressive",
+        "noun": "evidence suppression"
+      }
+    },
+    {
+      "term_id": "cj_rel_charging_indicting",
+      "term": "indicting",
+      "type": "relationship",
+      "domain": "criminal_justice",
+      "subject": "adjudication_and_sentencing",
+      "topic": "grand_jury_indictments",
+      "tags": ["accusatory", "formal_charge", "prosecutorial"],
+      "inflections": {
+        "adjective": "indictable",
+        "noun": "indictment"
+      }
+    },
+    {
+      "term_id": "cj_ent_search_warrant",
+      "term": "search warrant affidavit",
+      "type": "entity",
+      "domain": "criminal_justice",
+      "subject": "investigation_and_policing",
+      "topic": "search_and_seizure_execution",
+      "tags": ["warrant", "judicial_authorization", "fourth_amendment"],
+      "inflections": {
+        "singular": "search warrant affidavit",
+        "plural": "search warrant affidavits"
+      }
+    },
+    {
+      "term_id": "cj_ent_chain_log",
+      "term": "chain of custody log",
+      "type": "entity",
+      "domain": "criminal_justice",
+      "subject": "forensics_and_chain_of_custody",
+      "topic": "chain_of_custody_transfers",
+      "tags": ["documentary", "forensic", "inventory"],
+      "inflections": {
+        "singular": "chain of custody log",
+        "plural": "chain of custody logs"
+      }
+    },
+    {
+      "term_id": "cj_ent_arrest_report",
+      "term": "arrest and booking narrative",
+      "type": "entity",
+      "domain": "criminal_justice",
+      "subject": "custody_and_booking",
+      "topic": "warrantless_probable_cause_arrest",
+      "tags": ["police_report", "booking", "narrative"],
+      "inflections": {
+        "singular": "arrest and booking narrative",
+        "plural": "arrest and booking narratives"
+      }
+    },
+    {
+      "term_id": "cj_ent_miranda_waiver",
+      "term": "signed Miranda rights waiver form",
+      "type": "entity",
+      "domain": "criminal_justice",
+      "subject": "investigation_and_policing",
+      "topic": "custodial_interrogation",
+      "tags": ["fifth_amendment", "confession", "waiver"],
+      "inflections": {
+        "singular": "signed Miranda rights waiver form",
+        "plural": "signed Miranda rights waiver forms"
+      }
+    },
+    {
+      "term_id": "cj_ent_grand_jury_indictment",
+      "term": "true bill indictment",
+      "type": "entity",
+      "domain": "criminal_justice",
+      "subject": "adjudication_and_sentencing",
+      "topic": "grand_jury_indictments",
+      "tags": ["charging_instrument", "grand_jury", "formal"],
+      "inflections": {
+        "singular": "true bill indictment",
+        "plural": "true bill indictments"
+      }
+    },
+    {
+      "term_id": "cj_ent_ballistic_report",
+      "term": "ballistic comparison report",
+      "type": "entity",
+      "domain": "criminal_justice",
+      "subject": "forensics_and_chain_of_custody",
+      "topic": "ballistics_and_toolmark_matching",
+      "tags": ["scientific_evidence", "lab_report", "expert"],
+      "inflections": {
+        "singular": "ballistic comparison report",
+        "plural": "ballistic comparison reports"
+      }
+    },
+    {
+      "term_id": "cj_ent_dashcam_recording",
+      "term": "dashcam and body-worn camera video",
+      "type": "entity",
+      "domain": "criminal_justice",
+      "subject": "investigation_and_policing",
+      "topic": "traffic_and_terry_stops",
+      "tags": ["digital_evidence", "telemetry", "audiovisual"],
+      "inflections": {
+        "singular": "dashcam and body-worn camera video",
+        "plural": "dashcam and body-worn camera videos"
+      }
+    },
+    {
+      "term_id": "cj_ent_parole_violation_notice",
+      "term": "notice of parole violation",
+      "type": "entity",
+      "domain": "criminal_justice",
+      "subject": "corrections_and_parole",
+      "topic": "parole_revocation_proceedings",
+      "tags": ["corrections", "notice", "revocation"],
+      "inflections": {
+        "singular": "notice of parole violation",
+        "plural": "notices of parole violation"
+      }
+    },
+    {
+      "term_id": "cj_tgt_predicate_felony",
+      "term": "a predicate felony burglary charge",
+      "type": "target",
+      "domain": "criminal_justice",
+      "subject": "substantive_criminal_law",
+      "topic": "element_satisfaction",
+      "tags": ["charge", "felony", "predicate"]
+    },
+    {
+      "term_id": "cj_tgt_controlled_substance",
+      "term": "an illicit narcotics distribution enterprise",
+      "type": "target",
+      "domain": "criminal_justice",
+      "subject": "substantive_criminal_law",
+      "topic": "inchoate_conspiracy_and_attempt",
+      "tags": ["narcotics", "conspiracy", "distribution"]
+    },
+    {
+      "term_id": "cj_tgt_unlawful_stop",
+      "term": "a contested roadside vehicle seizure",
+      "type": "target",
+      "domain": "criminal_justice",
+      "subject": "investigation_and_policing",
+      "topic": "traffic_and_terry_stops",
+      "tags": ["fourth_amendment", "terry_stop", "suppression"]
+    },
+    {
+      "term_id": "cj_tgt_involuntary_confession",
+      "term": "an un-Mirandized stationhouse statement",
+      "type": "target",
+      "domain": "criminal_justice",
+      "subject": "investigation_and_policing",
+      "topic": "custodial_interrogation",
+      "tags": ["fifth_amendment", "voluntariness", "suppression"]
+    },
+    {
+      "term_id": "cj_tgt_tampered_specimen",
+      "term": "a compromised biological toxicology specimen",
+      "type": "target",
+      "domain": "criminal_justice",
+      "subject": "forensics_and_chain_of_custody",
+      "topic": "laboratory_toxicology_and_dna",
+      "tags": ["spoliation", "toxicology", "specimen"]
+    },
+    {
+      "term_id": "cj_tgt_bail_forfeiture",
+      "term": "a conditional pretrial release revocation",
+      "type": "target",
+      "domain": "criminal_justice",
+      "subject": "custody_and_booking",
+      "topic": "bail_and_bond_conditions",
+      "tags": ["bail", "revocation", "pretrial"]
+    },
+    {
+      "term_id": "cj_tgt_sentencing_enhancement",
+      "term": "a mandatory minimum weapon enhancement",
+      "type": "target",
+      "domain": "criminal_justice",
+      "subject": "adjudication_and_sentencing",
+      "topic": "statutory_sentencing_guidelines",
+      "tags": ["sentencing", "enhancement", "statutory"]
+    },
+    {
+      "term_id": "cj_stg_incident_response",
+      "term": "on-scene police response",
+      "type": "procedural_stage",
+      "domain": "criminal_justice",
+      "subject": "investigation_and_policing",
+      "topic": "incident_report_generation",
+      "tags": ["investigation", "timeline"]
+    },
+    {
+      "term_id": "cj_stg_station_booking",
+      "term": "custodial jail booking",
+      "type": "procedural_stage",
+      "domain": "criminal_justice",
+      "subject": "custody_and_booking",
+      "topic": "biometric_and_intake_processing",
+      "tags": ["intake", "timeline"]
+    },
+    {
+      "term_id": "cj_stg_grand_jury",
+      "term": "secret grand jury deliberations",
+      "type": "procedural_stage",
+      "domain": "criminal_justice",
+      "subject": "adjudication_and_sentencing",
+      "topic": "grand_jury_indictments",
+      "tags": ["grand_jury", "timeline"]
+    },
+    {
+      "term_id": "cj_stg_suppression_hearing",
+      "term": "a pretrial suppression hearing",
+      "type": "procedural_stage",
+      "domain": "criminal_justice",
+      "subject": "adjudication_and_sentencing",
+      "topic": "evidentiary_suppression_hearings",
+      "tags": ["pretrial", "timeline"]
+    },
+    {
+      "term_id": "cj_stg_parole_audit",
+      "term": "probationary field compliance monitoring",
+      "type": "procedural_stage",
+      "domain": "criminal_justice",
+      "subject": "corrections_and_parole",
+      "topic": "probationary_compliance_auditing",
+      "tags": ["post_conviction", "timeline"]
+    },
+    {
+      "term_id": "cj_eth_reasonable_suspicion",
+      "term": "reasonable articulable suspicion",
+      "type": "evidentiary_threshold",
+      "domain": "criminal_justice",
+      "subject": "investigation_and_policing",
+      "topic": "traffic_and_terry_stops",
+      "tags": ["terry", "fourth_amendment", "quantum_of_proof"]
+    },
+    {
+      "term_id": "cj_eth_probable_cause",
+      "term": "probable cause",
+      "type": "evidentiary_threshold",
+      "domain": "criminal_justice",
+      "subject": "investigation_and_policing",
+      "topic": "search_and_seizure_execution",
+      "tags": ["warrant", "arrest", "quantum_of_proof"]
+    },
+    {
+      "term_id": "cj_eth_preponderance",
+      "term": "a preponderance of the evidence",
+      "type": "evidentiary_threshold",
+      "domain": "criminal_justice",
+      "subject": "adjudication_and_sentencing",
+      "topic": "evidentiary_suppression_hearings",
+      "tags": ["suppression", "burden", "quantum_of_proof"]
+    },
+    {
+      "term_id": "cj_eth_beyond_reasonable_doubt",
+      "term": "proof beyond a reasonable doubt",
+      "type": "evidentiary_threshold",
+      "domain": "criminal_justice",
+      "subject": "adjudication_and_sentencing",
+      "topic": "element_satisfaction",
+      "tags": ["trial", "guilt", "quantum_of_proof"]
+    }
+  ],
+  "constraints": [
+    {
+      "type": "domain_alignment"
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "cj_rel_investigative_seizing"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "cj_ent_search_warrant",
+          "cj_ent_chain_log",
+          "cj_ent_dashcam_recording"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "cj_rel_custodial_interrogating"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "cj_ent_miranda_waiver"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "cj_rel_charging_indicting"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "cj_ent_grand_jury_indictment"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "cj_rel_probation_revoking"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "cj_ent_parole_violation_notice"
+        ]
+      }
+    },
+    {
+      "type": "excludes",
+      "if": {
+        "slot": "relationship",
+        "value": "cj_rel_custodial_interrogating"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "cj_tgt_tampered_specimen"
+        ]
+      }
+    }
+  ]
+}
+

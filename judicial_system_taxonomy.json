@@ -1,0 +1,604 @@
+{
+  "domain": "judicial_system",
+  "version": "2.0.0",
+  "scope_note": "A domain ontology and taxonomy mapping court proceedings, pleadings, discovery, motion practice, trial events, evidentiary relations, appellate review, and record administration in the U.S. legal system.",
+  "subjects": {
+    "civil_procedure": {
+      "description": "Rules, pleadings, motion practice, discovery procedures, and case management in civil litigation.",
+      "topics": [
+        "pleadings_and_service",
+        "discovery_and_disclosures",
+        "dispositive_motions",
+        "settlement_and_adr",
+        "preliminary_injunctions"
+      ]
+    },
+    "criminal_procedure": {
+      "description": "Constitutional protections, charging instruments, suppression hearings, plea bargains, and sentencing.",
+      "topics": [
+        "probable_cause_and_warrants",
+        "arraignment_and_bail",
+        "suppression_and_exclusion",
+        "plea_bargaining",
+        "sentencing_and_probation"
+      ]
+    },
+    "appellate_practice": {
+      "description": "Preservation of error, standards of review, briefing, oral argument, and appellate dispositions.",
+      "topics": [
+        "error_preservation",
+        "appellate_briefing",
+        "standards_of_review",
+        "appellate_mandates",
+        "interlocutory_appeals"
+      ]
+    },
+    "evidence_and_record_preservation": {
+      "description": "Authentication, admissibility, chain of custody, transcript verification, protective orders, and record sealing.",
+      "topics": [
+        "documentary_authentication",
+        "witness_competency_and_impeachment",
+        "privilege_and_work_product",
+        "record_sealing_and_redaction",
+        "spoliation_and_preservation"
+      ]
+    },
+    "judicial_administration": {
+      "description": "Docketing, calendar assignment, recusal, contempt, clerk operations, and enforcement of orders.",
+      "topics": [
+        "case_assignment_and_recusal",
+        "scheduling_and_calendaring",
+        "docket_management",
+        "contempt_and_sanctions",
+        "execution_and_garnishment"
+      ]
+    }
+  },
+  "slots": {
+    "relationship": {
+      "slot_id": "relationship",
+      "semantic_role": "procedural_relation",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["relationship"],
+        "domain_scope": ["judicial_system", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "entity": {
+      "slot_id": "entity",
+      "semantic_role": "filing_event_or_instrument",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["entity"],
+        "domain_scope": ["judicial_system", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "target": {
+      "slot_id": "target",
+      "semantic_role": "adjudicative_anchor",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["target"],
+        "domain_scope": ["judicial_system", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "case_stage": {
+      "slot_id": "case_stage",
+      "semantic_role": "procedural_posture",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["case_stage"],
+        "domain_scope": ["judicial_system", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "participant_role": {
+      "slot_id": "participant_role",
+      "semantic_role": "acting_party_or_officer",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["participant_role"],
+        "domain_scope": ["judicial_system", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "standard_of_review": {
+      "slot_id": "standard_of_review",
+      "semantic_role": "scrutiny_standard",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["standard_of_review"],
+        "domain_scope": ["judicial_system", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    }
+  },
+  "templates": [
+    {
+      "template_id": "jud_interrogative_core",
+      "pattern": "What {relationship} {entity:plural} relate to {target} [during {case_stage}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["case_stage"]
+    },
+    {
+      "template_id": "jud_role_investigation",
+      "pattern": "Which {entity:plural} submitted by {participant_role:article} serve a {relationship} function regarding {target}?",
+      "required_slots": ["relationship", "entity", "target", "participant_role"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "jud_appellate_review",
+      "pattern": "How do {relationship} {entity:plural} impact {target} under {standard_of_review} review?",
+      "required_slots": ["relationship", "entity", "target", "standard_of_review"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "jud_posture_diagnostic",
+      "pattern": "What {relationship} {entity:plural} are authorized by {participant_role:article} in {target} [at {case_stage}]?",
+      "required_slots": ["relationship", "entity", "target", "participant_role"],
+      "optional_slots": ["case_stage"]
+    }
+  ],
+  "vocabulary": [
+    {
+      "term_id": "jud_rel_filing",
+      "term": "filing",
+      "type": "relationship",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "pleadings_and_service",
+      "tags": ["docket", "submission", "formal"],
+      "inflections": {
+        "adjective": "filed",
+        "noun": "filing"
+      }
+    },
+    {
+      "term_id": "jud_rel_admitting",
+      "term": "admitting",
+      "type": "relationship",
+      "domain": "judicial_system",
+      "subject": "evidence_and_record_preservation",
+      "topic": "documentary_authentication",
+      "tags": ["admissibility", "evidentiary", "judicial_action"],
+      "inflections": {
+        "adjective": "admissible",
+        "noun": "admission"
+      }
+    },
+    {
+      "term_id": "jud_rel_excluding",
+      "term": "excluding",
+      "type": "relationship",
+      "domain": "judicial_system",
+      "subject": "evidence_and_record_preservation",
+      "topic": "privilege_and_work_product",
+      "tags": ["inadmissibility", "evidentiary", "judicial_action"],
+      "inflections": {
+        "adjective": "excludable",
+        "noun": "exclusion"
+      }
+    },
+    {
+      "term_id": "jud_rel_ruling",
+      "term": "ruling",
+      "type": "relationship",
+      "domain": "judicial_system",
+      "subject": "judicial_administration",
+      "topic": "case_assignment_and_recusal",
+      "tags": ["dispositive", "order", "judicial_action"],
+      "inflections": {
+        "adjective": "adjudicative",
+        "noun": "ruling"
+      }
+    },
+    {
+      "term_id": "jud_rel_preserving_record",
+      "term": "preserving-record",
+      "type": "relationship",
+      "domain": "judicial_system",
+      "subject": "evidence_and_record_preservation",
+      "topic": "spoliation_and_preservation",
+      "tags": ["preservation", "appellate_record", "protective"],
+      "inflections": {
+        "adjective": "record-preserving",
+        "noun": "record preservation"
+      }
+    },
+    {
+      "term_id": "jud_rel_appealing",
+      "term": "appealing",
+      "type": "relationship",
+      "domain": "judicial_system",
+      "subject": "appellate_practice",
+      "topic": "error_preservation",
+      "tags": ["appellate", "challenge", "review"],
+      "inflections": {
+        "adjective": "appellate",
+        "noun": "appeal"
+      }
+    },
+    {
+      "term_id": "jud_rel_sealing",
+      "term": "sealing",
+      "type": "relationship",
+      "domain": "judicial_system",
+      "subject": "evidence_and_record_preservation",
+      "topic": "record_sealing_and_redaction",
+      "tags": ["confidential", "protective", "restriction"],
+      "inflections": {
+        "adjective": "sealed",
+        "noun": "sealing"
+      }
+    },
+    {
+      "term_id": "jud_rel_sanctioning",
+      "term": "sanctioning",
+      "type": "relationship",
+      "domain": "judicial_system",
+      "subject": "judicial_administration",
+      "topic": "contempt_and_sanctions",
+      "tags": ["disciplinary", "compliance", "coercive"],
+      "inflections": {
+        "adjective": "sanctionable",
+        "noun": "sanction"
+      }
+    },
+    {
+      "term_id": "jud_ent_pleading",
+      "term": "pleading",
+      "type": "entity",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "pleadings_and_service",
+      "tags": ["formal_filing", "court_record"],
+      "inflections": {
+        "singular": "pleading",
+        "plural": "pleadings"
+      }
+    },
+    {
+      "term_id": "jud_ent_motion",
+      "term": "motion",
+      "type": "entity",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "dispositive_motions",
+      "tags": ["formal_filing", "relief_request"],
+      "inflections": {
+        "singular": "motion",
+        "plural": "motions"
+      }
+    },
+    {
+      "term_id": "jud_ent_interrogatory",
+      "term": "interrogatory",
+      "type": "entity",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "discovery_and_disclosures",
+      "tags": ["discovery", "written"],
+      "inflections": {
+        "singular": "interrogatory",
+        "plural": "interrogatories"
+      }
+    },
+    {
+      "term_id": "jud_ent_deposition_transcript",
+      "term": "deposition transcript",
+      "type": "entity",
+      "domain": "judicial_system",
+      "subject": "evidence_and_record_preservation",
+      "topic": "witness_competency_and_impeachment",
+      "tags": ["discovery", "evidentiary", "transcript"],
+      "inflections": {
+        "singular": "deposition transcript",
+        "plural": "deposition transcripts"
+      }
+    },
+    {
+      "term_id": "jud_ent_ruling_order",
+      "term": "court order",
+      "type": "entity",
+      "domain": "judicial_system",
+      "subject": "judicial_administration",
+      "topic": "case_assignment_and_recusal",
+      "tags": ["judicial_command", "dispositive"],
+      "inflections": {
+        "singular": "court order",
+        "plural": "court orders"
+      }
+    },
+    {
+      "term_id": "jud_ent_subpoena",
+      "term": "subpoena duces tecum",
+      "type": "entity",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "discovery_and_disclosures",
+      "tags": ["compulsion", "third_party", "discovery"],
+      "inflections": {
+        "singular": "subpoena duces tecum",
+        "plural": "subpoenas duces tecum"
+      }
+    },
+    {
+      "term_id": "jud_ent_appellate_brief",
+      "term": "appellate brief",
+      "type": "entity",
+      "domain": "judicial_system",
+      "subject": "appellate_practice",
+      "topic": "appellate_briefing",
+      "tags": ["brief", "appellate_filing"],
+      "inflections": {
+        "singular": "appellate brief",
+        "plural": "appellate briefs"
+      }
+    },
+    {
+      "term_id": "jud_ent_sealed_record",
+      "term": "sealed evidentiary exhibit",
+      "type": "entity",
+      "domain": "judicial_system",
+      "subject": "evidence_and_record_preservation",
+      "topic": "record_sealing_and_redaction",
+      "tags": ["confidential", "exhibit", "sealed"],
+      "inflections": {
+        "singular": "sealed evidentiary exhibit",
+        "plural": "sealed evidentiary exhibits"
+      }
+    },
+    {
+      "term_id": "jud_tgt_civil_case",
+      "term": "a complex civil action",
+      "type": "target",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "pleadings_and_service",
+      "tags": ["proceeding", "civil"]
+    },
+    {
+      "term_id": "jud_tgt_dispositive_issue",
+      "term": "a dispositive summary judgment issue",
+      "type": "target",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "dispositive_motions",
+      "tags": ["motion", "adjudication"]
+    },
+    {
+      "term_id": "jud_tgt_discovery_dispute",
+      "term": "a motion to compel discovery dispute",
+      "type": "target",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "discovery_and_disclosures",
+      "tags": ["discovery", "contested"]
+    },
+    {
+      "term_id": "jud_tgt_sanctions_proc",
+      "term": "a Rule 11 sanctions proceeding",
+      "type": "target",
+      "domain": "judicial_system",
+      "subject": "judicial_administration",
+      "topic": "contempt_and_sanctions",
+      "tags": ["disciplinary", "sanctions"]
+    },
+    {
+      "term_id": "jud_tgt_appellate_mandate",
+      "term": "an interlocutory petition for appellate review",
+      "type": "target",
+      "domain": "judicial_system",
+      "subject": "appellate_practice",
+      "topic": "interlocutory_appeals",
+      "tags": ["appellate", "mandate"]
+    },
+    {
+      "term_id": "jud_tgt_record_integrity",
+      "term": "the integrity of the official docket record",
+      "type": "target",
+      "domain": "judicial_system",
+      "subject": "evidence_and_record_preservation",
+      "topic": "spoliation_and_preservation",
+      "tags": ["docket", "preservation"]
+    },
+    {
+      "term_id": "jud_stg_initial_pleadings",
+      "term": "the initial pleadings stage",
+      "type": "case_stage",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "pleadings_and_service",
+      "tags": ["preliminary", "timeline"]
+    },
+    {
+      "term_id": "jud_stg_discovery",
+      "term": "formal discovery",
+      "type": "case_stage",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "discovery_and_disclosures",
+      "tags": ["investigative", "timeline"]
+    },
+    {
+      "term_id": "jud_stg_pretrial",
+      "term": "pretrial conference proceedings",
+      "type": "case_stage",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "dispositive_motions",
+      "tags": ["pretrial", "timeline"]
+    },
+    {
+      "term_id": "jud_stg_appeal",
+      "term": "appellate review",
+      "type": "case_stage",
+      "domain": "judicial_system",
+      "subject": "appellate_practice",
+      "topic": "appellate_briefing",
+      "tags": ["appellate", "timeline"]
+    },
+    {
+      "term_id": "jud_role_judge",
+      "term": "presiding judge",
+      "type": "participant_role",
+      "domain": "judicial_system",
+      "subject": "judicial_administration",
+      "topic": "case_assignment_and_recusal",
+      "tags": ["bench", "adjudicator"],
+      "inflections": {
+        "singular": "presiding judge",
+        "article": "the presiding judge"
+      }
+    },
+    {
+      "term_id": "jud_role_counsel",
+      "term": "opposing counsel",
+      "type": "participant_role",
+      "domain": "judicial_system",
+      "subject": "civil_procedure",
+      "topic": "pleadings_and_service",
+      "tags": ["attorney", "litigant"],
+      "inflections": {
+        "singular": "opposing counsel",
+        "article": "opposing counsel"
+      }
+    },
+    {
+      "term_id": "jud_role_special_master",
+      "term": "court-appointed special master",
+      "type": "participant_role",
+      "domain": "judicial_system",
+      "subject": "judicial_administration",
+      "topic": "case_assignment_and_recusal",
+      "tags": ["officer", "neutral"],
+      "inflections": {
+        "singular": "special master",
+        "article": "a court-appointed special master"
+      }
+    },
+    {
+      "term_id": "jud_sor_abuse_of_discretion",
+      "term": "abuse of discretion",
+      "type": "standard_of_review",
+      "domain": "judicial_system",
+      "subject": "appellate_practice",
+      "topic": "standards_of_review",
+      "tags": ["deferential", "standard_of_review"]
+    },
+    {
+      "term_id": "jud_sor_de_novo",
+      "term": "de novo",
+      "type": "standard_of_review",
+      "domain": "judicial_system",
+      "subject": "appellate_practice",
+      "topic": "standards_of_review",
+      "tags": ["non_deferential", "standard_of_review"]
+    },
+    {
+      "term_id": "jud_sor_clear_error",
+      "term": "clear error",
+      "type": "standard_of_review",
+      "domain": "judicial_system",
+      "subject": "appellate_practice",
+      "topic": "standards_of_review",
+      "tags": ["factual", "standard_of_review"]
+    }
+  ],
+  "constraints": [
+    {
+      "type": "domain_alignment"
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "jud_rel_filing"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "jud_ent_pleading",
+          "jud_ent_motion",
+          "jud_ent_appellate_brief"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "jud_rel_ruling"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "jud_ent_ruling_order"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "jud_rel_sealing"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "jud_ent_sealed_record",
+          "jud_ent_deposition_transcript"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "jud_rel_appealing"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "jud_tgt_appellate_mandate"
+        ]
+      }
+    },
+    {
+      "type": "excludes",
+      "if": {
+        "slot": "relationship",
+        "value": "jud_rel_sanctioning"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "jud_ent_deposition_transcript",
+          "jud_ent_interrogatory"
+        ]
+      }
+    }
+  ]
+}
+

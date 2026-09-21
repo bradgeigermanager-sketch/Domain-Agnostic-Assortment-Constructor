@@ -1,0 +1,590 @@
+{
+  "domain": "democratic_government",
+  "version": "2.0.0",
+  "scope_note": "A domain ontology and taxonomy mapping constitutional separation of powers, legislative deliberation, executive administration, administrative rulemaking, electoral integrity, judicial check-and-balance mechanisms, and public accountability.",
+  "subjects": {
+    "separation_of_powers_and_checks": {
+      "description": "Inter-branch balance, veto powers, legislative oversight, confirmation hearings, and constitutional prerogatives.",
+      "topics": [
+        "executive_veto_and_override",
+        "senate_advice_and_consent",
+        "congressional_investigation_and_subpoena",
+        "judicial_review_of_legislation",
+        "impeachment_and_removal"
+      ]
+    },
+    "legislative_process_and_statutory_enactment": {
+      "description": "Bill introduction, committee markup, floor debate, bicameral reconciliation, and statutory enrollment.",
+      "topics": [
+        "committee_referral_and_markup",
+        "floor_amendment_and_filibuster",
+        "bicameral_conference_reconciliation",
+        "appropriations_and_budgetary_authorization",
+        "statutory_sunset_and_reauthorization"
+      ]
+    },
+    "executive_administration_and_rulemaking": {
+      "description": "Notice-and-comment administrative rulemaking, executive orders, agency adjudication, and regulatory compliance.",
+      "topics": [
+        "administrative_procedure_act_rulemaking",
+        "executive_order_issuance",
+        "regulatory_impact_analysis",
+        "agency_adjudication_and_enforcement",
+        "interagency_coordination_and_clearance"
+      ]
+    },
+    "electoral_processes_and_franchise_integrity": {
+      "description": "Voter registration, ballot administration, campaign finance disclosure, certification of returns, and transition of power.",
+      "topics": [
+        "voter_registration_and_ballot_access",
+        "campaign_finance_disclosure_auditing",
+        "canvassing_and_certification_of_returns",
+        "electoral_district_reapportionment",
+        "peaceful_transfer_of_power"
+      ]
+    },
+    "public_accountability_and_transparency": {
+      "description": "Freedom of information requests, ethics compliance, inspectors general audits, whistleblower disclosures, and open meetings.",
+      "topics": [
+        "freedom_of_information_compliance",
+        "inspector_general_oversight_audits",
+        "government_ethics_financial_disclosure",
+        "whistleblower_protection_inquiries",
+        "public_notice_and_sunshine_compliance"
+      ]
+    }
+  },
+  "slots": {
+    "relationship": {
+      "slot_id": "relationship",
+      "semantic_role": "governance_or_procedural_relation",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["relationship"],
+        "domain_scope": ["democratic_government", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "entity": {
+      "slot_id": "entity",
+      "semantic_role": "legislative_executive_or_civic_instrument",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["entity"],
+        "domain_scope": ["democratic_government", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "target": {
+      "slot_id": "target",
+      "semantic_role": "governance_subject_institution_or_proceeding",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["target"],
+        "domain_scope": ["democratic_government", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "governance_branch": {
+      "slot_id": "governance_branch",
+      "semantic_role": "institutional_branch_or_forum",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["governance_branch"],
+        "domain_scope": ["democratic_government", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "procedural_framework": {
+      "slot_id": "procedural_framework",
+      "semantic_role": "governing_rule_or_enabling_authority",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["procedural_framework"],
+        "domain_scope": ["democratic_government", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    }
+  },
+  "templates": [
+    {
+      "template_id": "gov_interrogative_core",
+      "pattern": "What {relationship} {entity:plural} relate to {target} [within {governance_branch}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["governance_branch"]
+    },
+    {
+      "template_id": "gov_institutional_diagnostic",
+      "pattern": "Which {entity:plural} execute a {relationship} function regarding {target} under {procedural_framework}?",
+      "required_slots": ["relationship", "entity", "target", "procedural_framework"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "gov_oversight_inquiry",
+      "pattern": "How do {relationship} {entity:plural} originating in {governance_branch} check {target} [pursuant to {procedural_framework}]?",
+      "required_slots": ["relationship", "entity", "target", "governance_branch"],
+      "optional_slots": ["procedural_framework"]
+    },
+    {
+      "template_id": "gov_accountability_evaluation",
+      "pattern": "What {relationship} {entity:plural} enforce public accountability on {target} in accordance with {procedural_framework}?",
+      "required_slots": ["relationship", "entity", "target", "procedural_framework"],
+      "optional_slots": []
+    }
+  ],
+  "vocabulary": [
+    {
+      "term_id": "gov_rel_enacting",
+      "term": "enacting",
+      "type": "relationship",
+      "domain": "democratic_government",
+      "subject": "legislative_process_and_statutory_enactment",
+      "topic": "bicameral_conference_reconciliation",
+      "tags": ["legislative", "statutory", "bicameral"],
+      "inflections": {
+        "adjective": "enactive",
+        "noun": "enactment"
+      }
+    },
+    {
+      "term_id": "gov_rel_vetoing",
+      "term": "vetoing",
+      "type": "relationship",
+      "domain": "democratic_government",
+      "subject": "separation_of_powers_and_checks",
+      "topic": "executive_veto_and_override",
+      "tags": ["executive", "check", "negative"],
+      "inflections": {
+        "adjective": "veto-related",
+        "noun": "veto"
+      }
+    },
+    {
+      "term_id": "gov_rel_promulgating",
+      "term": "promulgating",
+      "type": "relationship",
+      "domain": "democratic_government",
+      "subject": "executive_administration_and_rulemaking",
+      "topic": "administrative_procedure_act_rulemaking",
+      "tags": ["administrative", "rulemaking", "regulatory"],
+      "inflections": {
+        "adjective": "promulgated",
+        "noun": "promulgation"
+      }
+    },
+    {
+      "term_id": "gov_rel_subpoenaing",
+      "term": "oversight-subpoenaing",
+      "type": "relationship",
+      "domain": "democratic_government",
+      "subject": "separation_of_powers_and_checks",
+      "topic": "congressional_investigation_and_subpoena",
+      "tags": ["investigative", "compulsion", "oversight"],
+      "inflections": {
+        "adjective": "subpoena-backed",
+        "noun": "subpoena enforcement"
+      }
+    },
+    {
+      "term_id": "gov_rel_confirming",
+      "term": "confirming",
+      "type": "relationship",
+      "domain": "democratic_government",
+      "subject": "separation_of_powers_and_checks",
+      "topic": "senate_advice_and_consent",
+      "tags": ["senate", "advice_and_consent", "appointment"],
+      "inflections": {
+        "adjective": "confirmatory",
+        "noun": "confirmation"
+      }
+    },
+    {
+      "term_id": "gov_rel_certifying_election",
+      "term": "election-certifying",
+      "type": "relationship",
+      "domain": "democratic_government",
+      "subject": "electoral_processes_and_franchise_integrity",
+      "topic": "canvassing_and_certification_of_returns",
+      "tags": ["electoral", "canvass", "integrity"],
+      "inflections": {
+        "adjective": "certifying",
+        "noun": "election certification"
+      }
+    },
+    {
+      "term_id": "gov_rel_auditing_ethics",
+      "term": "ethics-auditing",
+      "type": "relationship",
+      "domain": "democratic_government",
+      "subject": "public_accountability_and_transparency",
+      "topic": "inspector_general_oversight_audits",
+      "tags": ["oversight", "ethics", "transparency"],
+      "inflections": {
+        "adjective": "auditory",
+        "noun": "ethics audit"
+      }
+    },
+    {
+      "term_id": "gov_rel_impeaching",
+      "term": "impeaching",
+      "type": "relationship",
+      "domain": "democratic_government",
+      "subject": "separation_of_powers_and_checks",
+      "topic": "impeachment_and_removal",
+      "tags": ["constitutional_check", "removal", "quasi_judicial"],
+      "inflections": {
+        "adjective": "impeachment-related",
+        "noun": "impeachment"
+      }
+    },
+    {
+      "term_id": "gov_ent_enrolled_bill",
+      "term": "enrolled bicameral bill",
+      "type": "entity",
+      "domain": "democratic_government",
+      "subject": "legislative_process_and_statutory_enactment",
+      "topic": "bicameral_conference_reconciliation",
+      "tags": ["statutory", "bill", "congress"],
+      "inflections": {
+        "singular": "enrolled bicameral bill",
+        "plural": "enrolled bicameral bills"
+      }
+    },
+    {
+      "term_id": "gov_ent_executive_order",
+      "term": "presidential executive order",
+      "type": "entity",
+      "domain": "democratic_government",
+      "subject": "executive_administration_and_rulemaking",
+      "topic": "executive_order_issuance",
+      "tags": ["executive_directive", "presidential", "administrative"],
+      "inflections": {
+        "singular": "presidential executive order",
+        "plural": "presidential executive orders"
+      }
+    },
+    {
+      "term_id": "gov_ent_rulemaking_docket",
+      "term": "notice of proposed rulemaking (NPRM)",
+      "type": "entity",
+      "domain": "democratic_government",
+      "subject": "executive_administration_and_rulemaking",
+      "topic": "administrative_procedure_act_rulemaking",
+      "tags": ["federal_register", "notice_comment", "regulation"],
+      "inflections": {
+        "singular": "notice of proposed rulemaking (NPRM)",
+        "plural": "notices of proposed rulemaking (NPRMs)"
+      }
+    },
+    {
+      "term_id": "gov_ent_oversight_report",
+      "term": "congressional committee oversight report",
+      "type": "entity",
+      "domain": "democratic_government",
+      "subject": "separation_of_powers_and_checks",
+      "topic": "congressional_investigation_and_subpoena",
+      "tags": ["committee", "oversight", "investigative"],
+      "inflections": {
+        "singular": "congressional committee oversight report",
+        "plural": "congressional committee oversight reports"
+      }
+    },
+    {
+      "term_id": "gov_ent_articles_of_impeachment",
+      "term": "resolution of impeachment articles",
+      "type": "entity",
+      "domain": "democratic_government",
+      "subject": "separation_of_powers_and_checks",
+      "topic": "impeachment_and_removal",
+      "tags": ["house_resolution", "constitutional_instrument", "impeachment"],
+      "inflections": {
+        "singular": "resolution of impeachment articles",
+        "plural": "resolutions of impeachment articles"
+      }
+    },
+    {
+      "term_id": "gov_ent_canvass_certificate",
+      "term": "certified certificate of electoral ascertainment",
+      "type": "entity",
+      "domain": "democratic_government",
+      "subject": "electoral_processes_and_franchise_integrity",
+      "topic": "canvassing_and_certification_of_returns",
+      "tags": ["electoral_instrument", "state_canvass", "certification"],
+      "inflections": {
+        "singular": "certified certificate of electoral ascertainment",
+        "plural": "certified certificates of electoral ascertainment"
+      }
+    },
+    {
+      "term_id": "gov_ent_ig_audit_dossier",
+      "term": "inspector general semi-annual audit evaluation",
+      "type": "entity",
+      "domain": "democratic_government",
+      "subject": "public_accountability_and_transparency",
+      "topic": "inspector_general_oversight_audits",
+      "tags": ["audit", "inspector_general", "compliance"],
+      "inflections": {
+        "singular": "inspector general semi-annual audit evaluation",
+        "plural": "inspector general semi-annual audit evaluations"
+      }
+    },
+    {
+      "term_id": "gov_ent_foia_determination",
+      "term": "Freedom of Information Act agency disclosure release",
+      "type": "entity",
+      "domain": "democratic_government",
+      "subject": "public_accountability_and_transparency",
+      "topic": "freedom_of_information_compliance",
+      "tags": ["foia", "public_records", "transparency"],
+      "inflections": {
+        "singular": "Freedom of Information Act agency disclosure release",
+        "plural": "Freedom of Information Act agency disclosure releases"
+      }
+    },
+    {
+      "term_id": "gov_tgt_independent_agency",
+      "term": "an independent regulatory commission",
+      "type": "target",
+      "domain": "democratic_government",
+      "subject": "executive_administration_and_rulemaking",
+      "topic": "agency_adjudication_and_enforcement",
+      "tags": ["agency", "independent_commission", "administrative"]
+    },
+    {
+      "term_id": "gov_tgt_cabinet_nomination",
+      "term": "a cabinet-level executive nomination",
+      "type": "target",
+      "domain": "democratic_government",
+      "subject": "separation_of_powers_and_checks",
+      "topic": "senate_advice_and_consent",
+      "tags": ["appointments", "senate", "executive"]
+    },
+    {
+      "term_id": "gov_tgt_statutory_authorization",
+      "term": "a multi-year federal appropriations bill",
+      "type": "target",
+      "domain": "democratic_government",
+      "subject": "legislative_process_and_statutory_enactment",
+      "topic": "appropriations_and_budgetary_authorization",
+      "tags": ["budget", "appropriations", "congress"]
+    },
+    {
+      "term_id": "gov_tgt_electoral_slate",
+      "term": "a contested slate of presidential electors",
+      "type": "target",
+      "domain": "democratic_government",
+      "subject": "electoral_processes_and_franchise_integrity",
+      "topic": "canvassing_and_certification_of_returns",
+      "tags": ["elections", "electors", "electoral_college"]
+    },
+    {
+      "term_id": "gov_tgt_executive_privilege_assertion",
+      "term": "an executive privilege disclosure refusal",
+      "type": "target",
+      "domain": "democratic_government",
+      "subject": "separation_of_powers_and_checks",
+      "topic": "congressional_investigation_and_subpoena",
+      "tags": ["executive_privilege", "subpoena_dispute", "constitutional"]
+    },
+    {
+      "term_id": "gov_tgt_major_rule",
+      "term": "an economically significant administrative regulation",
+      "type": "target",
+      "domain": "democratic_government",
+      "subject": "executive_administration_and_rulemaking",
+      "topic": "regulatory_impact_analysis",
+      "tags": ["major_rule", "rulemaking", "oira"]
+    },
+    {
+      "term_id": "gov_tgt_ethics_violation",
+      "term": "a senior official conflict-of-interest referral",
+      "type": "target",
+      "domain": "democratic_government",
+      "subject": "public_accountability_and_transparency",
+      "topic": "government_ethics_financial_disclosure",
+      "tags": ["ethics", "conflict_of_interest", "accountability"]
+    },
+    {
+      "term_id": "gov_brn_legislative",
+      "term": "the United States Congress",
+      "type": "governance_branch",
+      "domain": "democratic_government",
+      "subject": "legislative_process_and_statutory_enactment",
+      "topic": "committee_referral_and_markup",
+      "tags": ["article_i", "bicameral", "branch"]
+    },
+    {
+      "term_id": "gov_brn_executive_office",
+      "term": "the Executive Office of the President",
+      "type": "governance_branch",
+      "domain": "democratic_government",
+      "subject": "executive_administration_and_rulemaking",
+      "topic": "executive_order_issuance",
+      "tags": ["article_ii", "presidency", "branch"]
+    },
+    {
+      "term_id": "gov_brn_administrative_agency",
+      "term": "a cabinet executive department",
+      "type": "governance_branch",
+      "domain": "democratic_government",
+      "subject": "executive_administration_and_rulemaking",
+      "topic": "interagency_coordination_and_clearance",
+      "tags": ["bureaucracy", "department", "branch"]
+    },
+    {
+      "term_id": "gov_brn_judicial_branch",
+      "term": "the federal judicial branch",
+      "type": "governance_branch",
+      "domain": "democratic_government",
+      "subject": "separation_of_powers_and_checks",
+      "topic": "judicial_review_of_legislation",
+      "tags": ["article_iii", "courts", "branch"]
+    },
+    {
+      "term_id": "gov_pf_administrative_procedure_act",
+      "term": "the Administrative Procedure Act (5 U.S.C. § 551 et seq.)",
+      "type": "procedural_framework",
+      "domain": "democratic_government",
+      "subject": "executive_administration_and_rulemaking",
+      "topic": "administrative_procedure_act_rulemaking",
+      "tags": ["rulemaking", "adjudication", "statutory_framework"]
+    },
+    {
+      "term_id": "gov_pf_congressional_review_act",
+      "term": "the Congressional Review Act (5 U.S.C. §§ 801-808)",
+      "type": "procedural_framework",
+      "domain": "democratic_government",
+      "subject": "separation_of_powers_and_checks",
+      "topic": "congressional_investigation_and_subpoena",
+      "tags": ["legislative_veto", "regulatory_disapproval", "statutory_framework"]
+    },
+    {
+      "term_id": "gov_pf_inspector_general_act",
+      "term": "the Inspector General Act of 1978 (5 U.S.C. App.)",
+      "type": "procedural_framework",
+      "domain": "democratic_government",
+      "subject": "public_accountability_and_transparency",
+      "topic": "inspector_general_oversight_audits",
+      "tags": ["auditing", "independence", "statutory_framework"]
+    },
+    {
+      "term_id": "gov_pf_electoral_count_reform_act",
+      "term": "the Electoral Count Reform and Presidential Transition Improvement Act",
+      "type": "procedural_framework",
+      "domain": "democratic_government",
+      "subject": "electoral_processes_and_franchise_integrity",
+      "topic": "canvassing_and_certification_of_returns",
+      "tags": ["elections", "certification", "statutory_framework"]
+    },
+    {
+      "term_id": "gov_pf_foia",
+      "term": "the Freedom of Information Act (5 U.S.C. § 552)",
+      "type": "procedural_framework",
+      "domain": "democratic_government",
+      "subject": "public_accountability_and_transparency",
+      "topic": "freedom_of_information_compliance",
+      "tags": ["sunshine", "open_records", "statutory_framework"]
+    }
+  ],
+  "constraints": [
+    {
+      "type": "domain_alignment"
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "gov_rel_enacting"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "gov_ent_enrolled_bill"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "gov_rel_promulgating"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "gov_ent_rulemaking_docket",
+          "gov_ent_executive_order"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "gov_rel_impeaching"
+      },
+      ""then": {
+        "slot": "entity",
+        "values": [
+          "gov_ent_articles_of_impeachment"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "gov_rel_confirming"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "gov_tgt_cabinet_nomination"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "gov_rel_certifying_election"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "gov_tgt_electoral_slate"
+        ]
+      }
+    },
+    {
+      "type": "excludes",
+      "if": {
+        "slot": "relationship",
+        "value": "gov_rel_vetoing"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "gov_ent_foia_determination",
+          "gov_ent_ig_audit_dossier",
+          "gov_ent_canvass_certificate"
+        ]
+      }
+    }
+  ]
+}

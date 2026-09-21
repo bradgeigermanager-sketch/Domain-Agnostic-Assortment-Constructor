@@ -1,0 +1,537 @@
+{
+  "domain": "rational_thought",
+  "version": "2.0.0",
+  "scope_note": "A domain ontology and taxonomy mapping formal and informal logic, epistemic justification, Bayesian inference, cognitive bias de-biasing, Toulmin argument modeling, dialectical inquiry, and critical thinking methodology.",
+  "subjects": {
+    "formal_and_informal_logic": {
+      "description": "Deductive validity, soundness, inductive strength, formal syllogisms, and structural fallacy identification.",
+      "topics": [
+        "deductive_syllogistic_validity",
+        "modal_and_propositional_logic",
+        "informal_fallacy_detection",
+        "soundness_and_completeness",
+        "countermodel_generation"
+      ]
+    },
+    "epistemology_and_justification": {
+      "description": "Theories of knowledge, epistemic warrant, foundationalism vs coherentism, defeasible reasoning, and testimony evaluation.",
+      "topics": [
+        "epistemic_warrant_and_entitlement",
+        "defeasible_reasoning_and_undercutting",
+        "coherentist_web_of_belief",
+        "testimony_and_epistemic_vigilance",
+        "skeptical_hypothesis_evaluation"
+      ]
+    },
+    "bayesian_and_probabilistic_inference": {
+      "description": "Prior probability updates, likelihood ratios, base-rate neglect mitigation, calibration, and expected utility.",
+      "topics": [
+        "bayesian_prior_updating",
+        "base_rate_integration",
+        "likelihood_ratio_weighing",
+        "epistemic_calibration_auditing",
+        "doxastic_uncertainty_quantification"
+      ]
+    },
+    "cognitive_heuristics_and_bias_mitigation": {
+      "description": "System 1/System 2 dual-process dynamics, heuristics, confirmation bias de-biasing, and adversarial collaboration.",
+      "topics": [
+        "confirmation_bias_debiasing",
+        "availability_heuristic_correction",
+        "steelmanning_and_adversarial_collaboration",
+        "motivated_reasoning_parsing",
+        "hindsight_bias_mitigation"
+      ]
+    },
+    "dialectics_and_argument_mapping": {
+      "description": "Toulmin argumentation structures, premise-conclusion mapping, dialectical commitments, and resolution of disputed premises.",
+      "topics": [
+        "toulmin_warrant_and_backing",
+        "dialectical_commitment_tracking",
+        "premise_undercutting_and_rebuttal",
+        "burden_of_inquiry_allocation",
+        "semantic_ambiguity_disambiguation"
+      ]
+    }
+  },
+  "slots": {
+    "relationship": {
+      "slot_id": "relationship",
+      "semantic_role": "logical_inferential_or_evaluative_relation",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["relationship"],
+        "domain_scope": ["rational_thought", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "entity": {
+      "slot_id": "entity",
+      "semantic_role": "inferential_instrument_premise_or_cognitive_construct",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["entity"],
+        "domain_scope": ["rational_thought", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "target": {
+      "slot_id": "target",
+      "semantic_role": "epistemic_claim_fallacy_or_hypothesis",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["target"],
+        "domain_scope": ["rational_thought", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "inferential_framework": {
+      "slot_id": "inferential_framework",
+      "semantic_role": "normative_reasoning_framework",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["inferential_framework"],
+        "domain_scope": ["rational_thought", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "epistemic_state": {
+      "slot_id": "epistemic_state",
+      "semantic_role": "doxastic_or_justification_status",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["epistemic_state"],
+        "domain_scope": ["rational_thought", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    }
+  },
+  "templates": [
+    {
+      "template_id": "rat_interrogative_core",
+      "pattern": "What {relationship} {entity:plural} relate to {target} [within {inferential_framework}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["inferential_framework"]
+    },
+    {
+      "template_id": "rat_epistemic_evaluation",
+      "pattern": "Which {entity:plural} provide a {relationship} basis for {target} given {epistemic_state:article}?",
+      "required_slots": ["relationship", "entity", "target", "epistemic_state"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "rat_dialectical_diagnostic",
+      "pattern": "How do {relationship} {entity:plural} evaluate {target} under {inferential_framework} standards?",
+      "required_slots": ["relationship", "entity", "target", "inferential_framework"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "rat_bias_mitigation_audit",
+      "pattern": "What {relationship} {entity:plural} mitigate cognitive distortion in {target} [reaching {epistemic_state:article}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["epistemic_state"]
+    }
+  ],
+  "vocabulary": [
+    {
+      "term_id": "rat_rel_deducing",
+      "term": "deducing",
+      "type": "relationship",
+      "domain": "rational_thought",
+      "subject": "formal_and_informal_logic",
+      "topic": "deductive_syllogistic_validity",
+      "tags": ["formal_logic", "deductive", "validity"],
+      "inflections": {
+        "adjective": "deductive",
+        "noun": "deduction"
+      }
+    },
+    {
+      "term_id": "rat_rel_undercutting",
+      "term": "undercutting",
+      "type": "relationship",
+      "domain": "rational_thought",
+      "subject": "epistemology_and_justification",
+      "topic": "defeasible_reasoning_and_undercutting",
+      "tags": ["defeasible", "epistemology", "defeater"],
+      "inflections": {
+        "adjective": "undercutting",
+        "noun": "undercutting defeater"
+      }
+    },
+    {
+      "term_id": "rat_rel_updating_bayesian",
+      "term": "bayesian-updating",
+      "type": "relationship",
+      "domain": "rational_thought",
+      "subject": "bayesian_and_probabilistic_inference",
+      "topic": "bayesian_prior_updating",
+      "tags": ["probabilistic", "bayesian", "epistemic"],
+      "inflections": {
+        "adjective": "bayesian-updating",
+        "noun": "bayesian updating"
+      }
+    },
+    {
+      "term_id": "rat_rel_steelmanning",
+      "term": "steelmanning",
+      "type": "relationship",
+      "domain": "rational_thought",
+      "subject": "cognitive_heuristics_and_bias_mitigation",
+      "topic": "steelmanning_and_adversarial_collaboration",
+      "tags": ["debiasing", "charity", "dialectical"],
+      "inflections": {
+        "adjective": "steelmanning",
+        "noun": "steelmanning"
+      }
+    },
+    {
+      "term_id": "rat_rel_warranting",
+      "term": "warranting",
+      "type": "relationship",
+      "domain": "rational_thought",
+      "subject": "dialectics_and_argument_mapping",
+      "topic": "toulmin_warrant_and_backing",
+      "tags": ["toulmin", "justification", "inferential"],
+      "inflections": {
+        "adjective": "warranting",
+        "noun": "warrant"
+      }
+    },
+    {
+      "term_id": "rat_rel_fallacy_committing",
+      "term": "fallaciously-committing",
+      "type": "relationship",
+      "domain": "rational_thought",
+      "subject": "formal_and_informal_logic",
+      "topic": "informal_fallacy_detection",
+      "tags": ["invalid", "fallacy", "cognitive_defect"],
+      "inflections": {
+        "adjective": "fallacious",
+        "noun": "fallacious reasoning"
+      }
+    },
+    {
+      "term_id": "rat_rel_disambiguating",
+      "term": "disambiguating",
+      "type": "relationship",
+      "domain": "rational_thought",
+      "subject": "dialectics_and_argument_mapping",
+      "topic": "semantic_ambiguity_disambiguation",
+      "tags": ["semantic", "clarity", "precision"],
+      "inflections": {
+        "adjective": "disambiguating",
+        "noun": "disambiguation"
+      }
+    },
+    {
+      "term_id": "rat_ent_countermodel",
+      "term": "semantic countermodel",
+      "type": "entity",
+      "domain": "rational_thought",
+      "subject": "formal_and_informal_logic",
+      "topic": "countermodel_generation",
+      "tags": ["formal_logic", "model_theory", "refutation"],
+      "inflections": {
+        "singular": "semantic countermodel",
+        "plural": "semantic countermodels"
+      }
+    },
+    {
+      "term_id": "rat_ent_rebutting_defeater",
+      "term": "rebutting defeater",
+      "type": "entity",
+      "domain": "rational_thought",
+      "subject": "epistemology_and_justification",
+      "topic": "defeasible_reasoning_and_undercutting",
+      "tags": ["epistemology", "justification", "defeater"],
+      "inflections": {
+        "singular": "rebutting defeater",
+        "plural": "rebutting defeaters"
+      }
+    },
+    {
+      "term_id": "rat_ent_likelihood_ratio",
+      "term": "Bayes factor likelihood ratio",
+      "type": "entity",
+      "domain": "rational_thought",
+      "subject": "bayesian_and_probabilistic_inference",
+      "topic": "likelihood_ratio_weighing",
+      "tags": ["probability", "evidence", "bayesian"],
+      "inflections": {
+        "singular": "Bayes factor likelihood ratio",
+        "plural": "Bayes factor likelihood ratios"
+      }
+    },
+    {
+      "term_id": "rat_ent_toulmin_warrant",
+      "term": "Toulmin inferential warrant",
+      "type": "entity",
+      "domain": "rational_thought",
+      "subject": "dialectics_and_argument_mapping",
+      "topic": "toulmin_warrant_and_backing",
+      "tags": ["argumentation", "structural_model", "bridge"],
+      "inflections": {
+        "singular": "Toulmin inferential warrant",
+        "plural": "Toulmin inferential warrants"
+      }
+    },
+    {
+      "term_id": "rat_ent_debiasing_checklist",
+      "term": "cognitive debiasing protocol",
+      "type": "entity",
+      "domain": "rational_thought",
+      "subject": "cognitive_heuristics_and_bias_mitigation",
+      "topic": "confirmation_bias_debiasing",
+      "tags": ["heuristic_correction", "metacognition", "procedural"],
+      "inflections": {
+        "singular": "cognitive debiasing protocol",
+        "plural": "cognitive debiasing protocols"
+      }
+    },
+    {
+      "term_id": "rat_ent_syllogism_proof",
+      "term": "formal natural deduction derivation",
+      "type": "entity",
+      "domain": "rational_thought",
+      "subject": "formal_and_informal_logic",
+      "topic": "deductive_syllogistic_validity",
+      "tags": ["deduction", "proof", "formalism"],
+      "inflections": {
+        "singular": "formal natural deduction derivation",
+        "plural": "formal natural deduction derivations"
+      }
+    },
+    {
+      "term_id": "rat_tgt_affirming_consequent",
+      "term": "an affirming-the-consequent formal fallacy",
+      "type": "target",
+      "domain": "rational_thought",
+      "subject": "formal_and_informal_logic",
+      "topic": "deductive_syllogistic_validity",
+      "tags": ["fallacy", "formal", "invalid"]
+    },
+    {
+      "term_id": "rat_tgt_base_rate_neglect",
+      "term": "a base-rate neglect cognitive distortion",
+      "type": "target",
+      "domain": "rational_thought",
+      "subject": "bayesian_and_probabilistic_inference",
+      "topic": "base_rate_integration",
+      "tags": ["bias", "probabilistic", "cognitive"]
+    },
+    {
+      "term_id": "rat_tgt_motivated_stopping",
+      "term": "a motivated-stopping evidentiary inquiry",
+      "type": "target",
+      "domain": "rational_thought",
+      "subject": "cognitive_heuristics_and_bias_mitigation",
+      "topic": "motivated_reasoning_parsing",
+      "tags": ["motivated_reasoning", "bias", "epistemic_defect"]
+    },
+    {
+      "term_id": "rat_tgt_contested_causal_claim",
+      "term": "a post-hoc-ergo-propter-hoc causal claim",
+      "type": "target",
+      "domain": "rational_thought",
+      "subject": "formal_and_informal_logic",
+      "topic": "informal_fallacy_detection",
+      "tags": ["fallacy", "causality", "informal"]
+    },
+    {
+      "term_id": "rat_tgt_uncalibrated_forecast",
+      "term": "an overconfident epistemic forecast",
+      "type": "target",
+      "domain": "rational_thought",
+      "subject": "bayesian_and_probabilistic_inference",
+      "topic": "epistemic_calibration_auditing",
+      "tags": ["calibration", "forecast", "uncertainty"]
+    },
+    {
+      "term_id": "rat_tgt_strawman_reconstruction",
+      "term": "a straw-man dialectical distortion",
+      "type": "target",
+      "domain": "rational_thought",
+      "subject": "cognitive_heuristics_and_bias_mitigation",
+      "topic": "steelmanning_and_adversarial_collaboration",
+      "tags": ["fallacy", "argumentation", "distortion"]
+    },
+    {
+      "term_id": "rat_if_classical_first_order",
+      "term": "classical first-order predicate logic",
+      "type": "inferential_framework",
+      "domain": "rational_thought",
+      "subject": "formal_and_informal_logic",
+      "topic": "soundness_and_completeness",
+      "tags": ["classical_logic", "deductive", "formal"]
+    },
+    {
+      "term_id": "rat_if_bayesian_epistemology",
+      "term": "normative Bayesian epistemology",
+      "type": "inferential_framework",
+      "domain": "rational_thought",
+      "subject": "bayesian_and_probabilistic_inference",
+      "topic": "bayesian_prior_updating",
+      "tags": ["bayesian", "probabilistic", "formal"]
+    },
+    {
+      "term_id": "rat_if_pragmadialectics",
+      "term": "pragma-dialectical argumentation theory",
+      "type": "inferential_framework",
+      "domain": "rational_thought",
+      "subject": "dialectics_and_argument_mapping",
+      "topic": "dialectical_commitment_tracking",
+      "tags": ["dialectics", "argumentation", "discourse"]
+    },
+    {
+      "term_id": "rat_if_dual_process_theory",
+      "term": "dual-process cognitive rationality theory",
+      "type": "inferential_framework",
+      "domain": "rational_thought",
+      "subject": "cognitive_heuristics_and_bias_mitigation",
+      "topic": "confirmation_bias_debiasing",
+      "tags": ["cognitive_science", "dual_process", "descriptive_normative"]
+    },
+    {
+      "term_id": "rat_eps_warranted_belief",
+      "term": "epistemically warranted belief",
+      "type": "epistemic_state",
+      "domain": "rational_thought",
+      "subject": "epistemology_and_justification",
+      "topic": "epistemic_warrant_and_entitlement",
+      "tags": ["justified", "warranted", "high_confidence"],
+      "inflections": {
+        "singular": "epistemically warranted belief",
+        "article": "an epistemically warranted belief"
+      }
+    },
+    {
+      "term_id": "rat_eps_defeasible_suspension",
+      "term": "defeasible doxastic suspension",
+      "type": "epistemic_state",
+      "domain": "rational_thought",
+      "subject": "epistemology_and_justification",
+      "topic": "defeasible_reasoning_and_undercutting",
+      "tags": ["suspension", "undecided", "skeptical"],
+      "inflections": {
+        "singular": "defeasible doxastic suspension",
+        "article": "a defeasible doxastic suspension"
+      }
+    },
+    {
+      "term_id": "rat_eps_calibrated_credence",
+      "term": "empirically calibrated subjective credence",
+      "type": "epistemic_state",
+      "domain": "rational_thought",
+      "subject": "bayesian_and_probabilistic_inference",
+      "topic": "epistemic_calibration_auditing",
+      "tags": ["probabilistic", "calibrated", "credence"],
+      "inflections": {
+        "singular": "empirically calibrated subjective credence",
+        "article": "an empirically calibrated subjective credence"
+      }
+    },
+    {
+      "term_id": "rat_eps_cognitive_entrenchment",
+      "term": "dogmatic cognitive entrenchment",
+      "type": "epistemic_state",
+      "domain": "rational_thought",
+      "subject": "cognitive_heuristics_and_bias_mitigation",
+      "topic": "confirmation_bias_debiasing",
+      "tags": ["biased", "entrenched", "epistemic_defect"],
+      "inflections": {
+        "singular": "dogmatic cognitive entrenchment",
+        "article": "a dogmatic cognitive entrenchment"
+      }
+    }
+  ],
+  "constraints": [
+    {
+      "type": "domain_alignment"
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "rat_rel_deducing"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "rat_ent_countermodel",
+          "rat_ent_syllogism_proof"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "rat_rel_updating_bayesian"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "rat_ent_likelihood_ratio"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "rat_rel_updating_bayesian"
+      },
+      "then": {
+        "slot": "inferential_framework",
+        "values": [
+          "rat_if_bayesian_epistemology"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "rat_rel_steelmanning"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "rat_tgt_strawman_reconstruction",
+          "rat_tgt_motivated_stopping"
+        ]
+      }
+    },
+    {
+      "type": "excludes",
+      "if": {
+        "slot": "relationship",
+        "value": "rat_rel_deducing"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "rat_tgt_base_rate_neglect",
+          "rat_tgt_uncalibrated_forecast"
+        ]
+      }
+    }
+  ]
+}
+

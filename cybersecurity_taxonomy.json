@@ -1,0 +1,585 @@
+{
+  "domain": "cybersecurity",
+  "version": "2.0.0",
+  "scope_note": "A domain ontology and taxonomy mapping threat actors, attack vectors, defensive posture, digital forensics, incident response, and security operations center (SOC) telemetry.",
+  "subjects": {
+    "threat_intelligence": {
+      "description": "Tactics, techniques, procedures (TTPs), threat actors, indicators of compromise, and campaign tracking.",
+      "topics": [
+        "actor_attribution",
+        "ttp_classification",
+        "ioc_extraction",
+        "infrastructure_tracking",
+        "threat_hunting"
+      ]
+    },
+    "vulnerability_management": {
+      "description": "Identification, assessment, remediation, and mitigation of software, firmware, and misconfiguration flaws.",
+      "topics": [
+        "cve_analysis",
+        "surface_attack_mapping",
+        "patch_management",
+        "configuration_auditing",
+        "exploitability_assessment"
+      ]
+    },
+    "incident_response_and_forensics": {
+      "description": "Triage, containment, host/network artifact reconstruction, chain of custody, and post-incident eradication.",
+      "topics": [
+        "triage_and_scoping",
+        "host_artifact_analysis",
+        "network_traffic_reconstruction",
+        "evidence_chain_of_custody",
+        "containment_and_remediation"
+      ]
+    },
+    "security_operations": {
+      "description": "Telemetry aggregation, detection engineering, SIEM/SOAR alerting, correlation, and policy enforcement.",
+      "topics": [
+        "detection_rule_authoring",
+        "telemetry_correlation",
+        "pipeline_monitoring",
+        "alert_triage",
+        "automated_orchestration"
+      ]
+    },
+    "identity_and_access_control": {
+      "description": "Authentication, authorization, credential governance, privileged access management, and policy boundaries.",
+      "topics": [
+        "credential_governance",
+        "privilege_escalation_detection",
+        "federation_and_sso",
+        "zero_trust_enforcement",
+        "mfa_bypass_analysis"
+      ]
+    }
+  },
+  "slots": {
+    "relationship": {
+      "slot_id": "relationship",
+      "semantic_role": "predicate_relation",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["relationship"],
+        "domain_scope": ["cybersecurity", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "entity": {
+      "slot_id": "entity",
+      "semantic_role": "focal_artifact_or_event",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["entity"],
+        "domain_scope": ["cybersecurity", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "target": {
+      "slot_id": "target",
+      "semantic_role": "investigative_anchor",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["target"],
+        "domain_scope": ["cybersecurity", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "temporal": {
+      "slot_id": "temporal",
+      "semantic_role": "time_qualifier",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["temporal"],
+        "domain_scope": ["*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "evidence_status": {
+      "slot_id": "evidence_status",
+      "semantic_role": "forensic_confidence",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["evidence_status"],
+        "domain_scope": ["*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    }
+  },
+  "templates": [
+    {
+      "template_id": "sec_interrogative_core",
+      "pattern": "What {relationship} {entity:plural} relate to {target} [during {temporal}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["temporal", "evidence_status"]
+    },
+    {
+      "template_id": "sec_investigative_diagnostic",
+      "pattern": "Which {entity:plural} function in a {relationship} capacity regarding {target} [when {evidence_status}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["evidence_status"]
+    },
+    {
+      "template_id": "sec_traceability_assessment",
+      "pattern": "What {relationship} {entity:plural} were observed {temporal} {target}?",
+      "required_slots": ["relationship", "entity", "target", "temporal"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "sec_attribution_audit",
+      "pattern": "How does {evidence_status} {entity:singular} exhibit a {relationship} nexus with {target}?",
+      "required_slots": ["relationship", "entity", "target", "evidence_status"],
+      "optional_slots": []
+    }
+  ],
+  "vocabulary": [
+    {
+      "term_id": "cs_rel_exfiltrating",
+      "term": "exfiltrating",
+      "type": "relationship",
+      "domain": "cybersecurity",
+      "subject": "incident_response_and_forensics",
+      "topic": "triage_and_scoping",
+      "tags": ["egress", "hostile", "adversarial"],
+      "inflections": {
+        "adjective": "exfiltrative",
+        "noun": "exfiltration"
+      }
+    },
+    {
+      "term_id": "cs_rel_credential_harvesting",
+      "term": "credential-harvesting",
+      "type": "relationship",
+      "domain": "cybersecurity",
+      "subject": "identity_and_access_control",
+      "topic": "credential_governance",
+      "tags": ["authentication", "reconnaissance", "adversarial"],
+      "inflections": {
+        "adjective": "credential-harvesting",
+        "noun": "credential harvesting"
+      }
+    },
+    {
+      "term_id": "cs_rel_lateral_moving",
+      "term": "lateral-movement",
+      "type": "relationship",
+      "domain": "cybersecurity",
+      "subject": "threat_intelligence",
+      "topic": "ttp_classification",
+      "tags": ["pivot", "traversal", "adversarial"],
+      "inflections": {
+        "adjective": "lateral-moving",
+        "noun": "lateral movement"
+      }
+    },
+    {
+      "term_id": "cs_rel_privilege_escalating",
+      "term": "privilege-escalating",
+      "type": "relationship",
+      "domain": "cybersecurity",
+      "subject": "identity_and_access_control",
+      "topic": "privilege_escalation_detection",
+      "tags": ["exploitation", "elevation", "adversarial"],
+      "inflections": {
+        "adjective": "privilege-escalating",
+        "noun": "privilege escalation"
+      }
+    },
+    {
+      "term_id": "cs_rel_defense_evading",
+      "term": "defense-evading",
+      "type": "relationship",
+      "domain": "cybersecurity",
+      "subject": "threat_intelligence",
+      "topic": "ttp_classification",
+      "tags": ["obfuscation", "stealth", "adversarial"],
+      "inflections": {
+        "adjective": "defense-evasive",
+        "noun": "defense evasion"
+      }
+    },
+    {
+      "term_id": "cs_rel_containment_facilitating",
+      "term": "containment-facilitating",
+      "type": "relationship",
+      "domain": "cybersecurity",
+      "subject": "incident_response_and_forensics",
+      "topic": "containment_and_remediation",
+      "tags": ["defensive", "mitigation", "operational"],
+      "inflections": {
+        "adjective": "containment-facilitating",
+        "noun": "containment facilitation"
+      }
+    },
+    {
+      "term_id": "cs_rel_telemetry_altering",
+      "term": "telemetry-altering",
+      "type": "relationship",
+      "domain": "cybersecurity",
+      "subject": "incident_response_and_forensics",
+      "topic": "evidence_chain_of_custody",
+      "tags": ["anti_forensics", "tampering", "adversarial"],
+      "inflections": {
+        "adjective": "telemetry-altering",
+        "noun": "telemetry alteration"
+      }
+    },
+    {
+      "term_id": "cs_rel_policy_violating",
+      "term": "policy-violating",
+      "type": "relationship",
+      "domain": "cybersecurity",
+      "subject": "security_operations",
+      "topic": "detection_rule_authoring",
+      "tags": ["compliance", "governance", "anomaly"],
+      "inflections": {
+        "adjective": "policy-violating",
+        "noun": "policy violation"
+      }
+    },
+    {
+      "term_id": "cs_rel_vulnerability_triggering",
+      "term": "vulnerability-triggering",
+      "type": "relationship",
+      "domain": "cybersecurity",
+      "subject": "vulnerability_management",
+      "topic": "exploitability_assessment",
+      "tags": ["exploit", "execution", "adversarial"],
+      "inflections": {
+        "adjective": "vulnerability-triggering",
+        "noun": "vulnerability triggering"
+      }
+    },
+    {
+      "term_id": "cs_rel_forensic_preserving",
+      "term": "forensic-preserving",
+      "type": "relationship",
+      "domain": "cybersecurity",
+      "subject": "incident_response_and_forensics",
+      "topic": "evidence_chain_of_custody",
+      "tags": ["defensive", "custody", "evidentiary"],
+      "inflections": {
+        "adjective": "forensic-preserving",
+        "noun": "forensic preservation"
+      }
+    },
+    {
+      "term_id": "cs_ent_beacon",
+      "term": "C2 beacon",
+      "type": "entity",
+      "domain": "cybersecurity",
+      "subject": "threat_intelligence",
+      "topic": "infrastructure_tracking",
+      "tags": ["network", "telemetry", "adversarial"],
+      "inflections": {
+        "singular": "C2 beacon",
+        "plural": "C2 beacons"
+      }
+    },
+    {
+      "term_id": "cs_ent_pcap",
+      "term": "packet capture",
+      "type": "entity",
+      "domain": "cybersecurity",
+      "subject": "incident_response_and_forensics",
+      "topic": "network_traffic_reconstruction",
+      "tags": ["network", "raw_data", "evidentiary"],
+      "inflections": {
+        "singular": "packet capture",
+        "plural": "packet captures"
+      }
+    },
+    {
+      "term_id": "cs_ent_shimcache",
+      "term": "Shimcache entry",
+      "type": "entity",
+      "domain": "cybersecurity",
+      "subject": "incident_response_and_forensics",
+      "topic": "host_artifact_analysis",
+      "tags": ["endpoint", "windows", "forensic_artifact"],
+      "inflections": {
+        "singular": "Shimcache entry",
+        "plural": "Shimcache entries"
+      }
+    },
+    {
+      "term_id": "cs_ent_token",
+      "term": "OAuth access token",
+      "type": "entity",
+      "domain": "cybersecurity",
+      "subject": "identity_and_access_control",
+      "topic": "credential_governance",
+      "tags": ["identity", "cloud", "auth_primitive"],
+      "inflections": {
+        "singular": "OAuth access token",
+        "plural": "OAuth access tokens"
+      }
+    },
+    {
+      "term_id": "cs_ent_detection_rule",
+      "term": "Sigma detection rule",
+      "type": "entity",
+      "domain": "cybersecurity",
+      "subject": "security_operations",
+      "topic": "detection_rule_authoring",
+      "tags": ["siem", "rule", "defensive"],
+      "inflections": {
+        "singular": "Sigma detection rule",
+        "plural": "Sigma detection rules"
+      }
+    },
+    {
+      "term_id": "cs_ent_shellcode",
+      "term": "staged shellcode",
+      "type": "entity",
+      "domain": "cybersecurity",
+      "subject": "vulnerability_management",
+      "topic": "exploitability_assessment",
+      "tags": ["payload", "binary", "adversarial"],
+      "inflections": {
+        "singular": "staged shellcode",
+        "plural": "staged shellcodes"
+      }
+    },
+    {
+      "term_id": "cs_ent_memory_dump",
+      "term": "volatile memory dump",
+      "type": "entity",
+      "domain": "cybersecurity",
+      "subject": "incident_response_and_forensics",
+      "topic": "host_artifact_analysis",
+      "tags": ["ram", "forensic_artifact", "evidentiary"],
+      "inflections": {
+        "singular": "volatile memory dump",
+        "plural": "volatile memory dumps"
+      }
+    },
+    {
+      "term_id": "cs_ent_auditd_log",
+      "term": "auditd event log",
+      "type": "entity",
+      "domain": "cybersecurity",
+      "subject": "security_operations",
+      "topic": "pipeline_monitoring",
+      "tags": ["linux", "log", "telemetry"],
+      "inflections": {
+        "singular": "auditd event log",
+        "plural": "auditd event logs"
+      }
+    },
+    {
+      "term_id": "cs_ent_kerberos_ticket",
+      "term": "Kerberos service ticket",
+      "type": "entity",
+      "domain": "cybersecurity",
+      "subject": "identity_and_access_control",
+      "topic": "privilege_escalation_detection",
+      "tags": ["active_directory", "authentication", "auth_primitive"],
+      "inflections": {
+        "singular": "Kerberos service ticket",
+        "plural": "Kerberos service tickets"
+      }
+    },
+    {
+      "term_id": "cs_ent_api_payload",
+      "term": "webhook delivery payload",
+      "type": "entity",
+      "domain": "cybersecurity",
+      "subject": "security_operations",
+      "topic": "automated_orchestration",
+      "tags": ["integration", "json", "transmission"],
+      "inflections": {
+        "singular": "webhook delivery payload",
+        "plural": "webhook delivery payloads"
+      }
+    },
+    {
+      "term_id": "cs_tgt_exfil_channel",
+      "term": "any encrypted DNS tunneling channel",
+      "type": "target",
+      "domain": "cybersecurity",
+      "subject": "threat_intelligence",
+      "topic": "ttp_classification",
+      "tags": ["c2", "egress", "network"]
+    },
+    {
+      "term_id": "cs_tgt_lateral_smb",
+      "term": "an unauthorized PsExec execution sequence",
+      "type": "target",
+      "domain": "cybersecurity",
+      "subject": "threat_intelligence",
+      "topic": "ttp_classification",
+      "tags": ["execution", "windows", "internal"]
+    },
+    {
+      "term_id": "cs_tgt_zero_day",
+      "term": "an unauthenticated remote code execution event",
+      "type": "target",
+      "domain": "cybersecurity",
+      "subject": "vulnerability_management",
+      "topic": "exploitability_assessment",
+      "tags": ["critical", "ingress", "exploit"]
+    },
+    {
+      "term_id": "cs_tgt_ransomware",
+      "term": "a volume shadow copy deletion procedure",
+      "type": "target",
+      "domain": "cybersecurity",
+      "subject": "incident_response_and_forensics",
+      "topic": "triage_and_scoping",
+      "tags": ["impact", "ransomware", "destructive"]
+    },
+    {
+      "term_id": "cs_tgt_cloud_imds",
+      "term": "a cloud metadata service credential extraction",
+      "type": "target",
+      "domain": "cybersecurity",
+      "subject": "identity_and_access_control",
+      "topic": "credential_governance",
+      "tags": ["aws", "azure", "credential_theft"]
+    },
+    {
+      "term_id": "cs_tgt_dcsync",
+      "term": "an Active Directory directory replication sync (DCSync)",
+      "type": "target",
+      "domain": "cybersecurity",
+      "subject": "identity_and_access_control",
+      "topic": "privilege_escalation_detection",
+      "tags": ["active_directory", "ntds", "critical"]
+    },
+    {
+      "term_id": "cs_tgt_log_clearing",
+      "term": "a system event log purging event (Event ID 1102)",
+      "type": "target",
+      "domain": "cybersecurity",
+      "subject": "incident_response_and_forensics",
+      "topic": "evidence_chain_of_custody",
+      "tags": ["evasion", "anti_forensics", "tampering"]
+    },
+    {
+      "term_id": "cs_tgt_supply_chain",
+      "term": "an upstream open-source dependency injection",
+      "type": "target",
+      "domain": "cybersecurity",
+      "subject": "vulnerability_management",
+      "topic": "surface_attack_mapping",
+      "tags": ["software_supply_chain", "pipeline", "integrity"]
+    },
+    {
+      "term_id": "univ_temp_pre_exploit",
+      "term": "initial access",
+      "type": "temporal",
+      "domain": "*",
+      "subject": "*",
+      "topic": "*",
+      "tags": ["timeline", "initial"],
+      "inflections": {
+        "singular": "initial access",
+        "adverbial": "prior to initial access"
+      }
+    },
+    {
+      "term_id": "univ_temp_persistence",
+      "term": "persistence establishment",
+      "type": "temporal",
+      "domain": "*",
+      "subject": "*",
+      "topic": "*",
+      "tags": ["timeline", "intermediate"],
+      "inflections": {
+        "singular": "persistence establishment",
+        "adverbial": "during persistence establishment"
+      }
+    },
+    {
+      "term_id": "univ_temp_containment",
+      "term": "network host isolation",
+      "type": "temporal",
+      "domain": "*",
+      "subject": "*",
+      "topic": "*",
+      "tags": ["timeline", "remediation"],
+      "inflections": {
+        "singular": "network host isolation",
+        "adverbial": "post-isolation"
+      }
+    },
+    {
+      "term_id": "univ_ev_confirmed_ioc",
+      "term": "confirmed IOC matches",
+      "type": "evidence_status",
+      "domain": "*",
+      "subject": "*",
+      "topic": "*",
+      "tags": ["confidence", "verified"],
+      "inflections": {
+        "singular": "confirmed",
+        "predicate": "empirically corroborated"
+      }
+    },
+    {
+      "term_id": "univ_ev_heuristic_alert",
+      "term": "heuristic anomaly alerts",
+      "type": "evidence_status",
+      "domain": "*",
+      "subject": "*",
+      "topic": "*",
+      "tags": ["confidence", "unverified"],
+      "inflections": {
+        "singular": "heuristic",
+        "predicate": "heuristically flagged"
+      }
+    }
+  ],
+  "constraints": [
+    {
+      "type": "domain_alignment"
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "cs_rel_telemetry_altering"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "cs_ent_auditd_log",
+          "cs_ent_shimcache",
+          "cs_ent_memory_dump"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "cs_rel_privilege_escalating"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "cs_tgt_dcsync",
+          "cs_tgt_cloud_imds",
+          "cs_tgt_zero_day"
+        ]
+      }
+    }
+  ]
+}
+

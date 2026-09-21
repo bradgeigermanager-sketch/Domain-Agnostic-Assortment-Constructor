@@ -1,0 +1,570 @@
+{
+  "domain": "business_ethics",
+  "version": "2.0.0",
+  "scope_note": "A domain ontology and taxonomy mapping corporate governance, fiduciary duties, regulatory compliance, anti-bribery/anti-corruption, conflict-of-interest mitigation, environmental and social governance (ESG), whistleblower reporting, and executive accountability.",
+  "subjects": {
+    "corporate_governance_and_fiduciary_duties": {
+      "description": "Board oversight, duties of care and loyalty, shareholder rights, executive compensation governance, and Caremark oversight standards.",
+      "topics": [
+        "duty_of_loyalty_and_care",
+        "board_oversight_and_caremark_claims",
+        "related_party_transactions",
+        "executive_compensation_clawbacks",
+        "shareholder_derivative_actions"
+      ]
+    },
+    "anticorruption_and_trade_integrity": {
+      "description": "Foreign Corrupt Practices Act (FCPA) compliance, bribery prohibition, anti-money laundering (AML), export controls, and sanction screenings.",
+      "topics": [
+        "fcpa_anti_bribery_prohibitions",
+        "third_party_intermediary_due_diligence",
+        "anti_money_laundering_know_your_customer",
+        "trade_sanctions_and_export_controls",
+        "facilitation_payment_auditing"
+      ]
+    },
+    "accounting_integrity_and_financial_reporting": {
+      "description": "Internal financial controls, revenue recognition auditing, Sarbanes-Oxley (SOX) compliance, and forensic accounting reviews.",
+      "topics": [
+        "sox_internal_control_assessments",
+        "revenue_recognition_fraud_detection",
+        "off_balance_sheet_transaction_scrutiny",
+        "independent_audit_committee_oversight",
+        "financial_restatements_and_disclosures"
+      ]
+    },
+    "workplace_ethics_and_whistleblower_systems": {
+      "description": "Code of conduct enforcement, hotline intake, retaliation prevention, harassment investigations, and labor standard auditing.",
+      "topics": [
+        "whistleblower_hotline_intake_and_triage",
+        "anti_retaliation_monitoring_and_remedies",
+        "code_of_conduct_violation_investigation",
+        "diversity_equity_and_fair_labor_audits",
+        "confidential_internal_grievance_mechanisms"
+      ]
+    },
+    "environmental_social_governance_and_supply_chain": {
+      "description": "Sustainability claims verification, human rights due diligence in vendor pipelines, climate disclosures, and consumer product transparency.",
+      "topics": [
+        "greenwashing_and_esg_metrics_verification",
+        "supply_chain_human_rights_due_diligence",
+        "scope_1_2_3_carbon_accounting_audits",
+        "conflict_minerals_and_raw_material_lineage",
+        "product_safety_and_consumer_transparency"
+      ]
+    }
+  },
+  "slots": {
+    "relationship": {
+      "slot_id": "relationship",
+      "semantic_role": "ethical_governance_or_compliance_relation",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["relationship"],
+        "domain_scope": ["business_ethics", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "entity": {
+      "slot_id": "entity",
+      "semantic_role": "compliance_record_audit_instrument_or_action",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["entity"],
+        "domain_scope": ["business_ethics", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "target": {
+      "slot_id": "target",
+      "semantic_role": "ethical_risk_entity_transaction_or_violation",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["target"],
+        "domain_scope": ["business_ethics", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "regulatory_framework": {
+      "slot_id": "regulatory_framework",
+      "semantic_role": "governing_statute_standard_or_code",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["regulatory_framework"],
+        "domain_scope": ["business_ethics", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "governance_body": {
+      "slot_id": "governance_body",
+      "semantic_role": "oversight_authority_or_committee",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["governance_body"],
+        "domain_scope": ["business_ethics", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    }
+  },
+  "templates": [
+    {
+      "template_id": "eth_interrogative_core",
+      "pattern": "What {relationship} {entity:plural} relate to {target} [pursuant to {regulatory_framework}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["regulatory_framework"]
+    },
+    {
+      "template_id": "eth_oversight_diagnostic",
+      "pattern": "Which {entity:plural} supervised by {governance_body:article} demonstrate a {relationship} nexus with {target}?",
+      "required_slots": ["relationship", "entity", "target", "governance_body"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "eth_compliance_audit_inquiry",
+      "pattern": "How do {relationship} {entity:plural} evaluate compliance of {target} under {regulatory_framework}?",
+      "required_slots": ["relationship", "entity", "target", "regulatory_framework"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "eth_fiduciary_review",
+      "pattern": "What {relationship} {entity:plural} substantiated by {governance_body:article} address {target} [under {regulatory_framework}]?",
+      "required_slots": ["relationship", "entity", "target", "governance_body"],
+      "optional_slots": ["regulatory_framework"]
+    }
+  ],
+  "vocabulary": [
+    {
+      "term_id": "eth_rel_whistleblowing",
+      "term": "whistleblower-reporting",
+      "type": "relationship",
+      "domain": "business_ethics",
+      "subject": "workplace_ethics_and_whistleblower_systems",
+      "topic": "whistleblower_hotline_intake_and_triage",
+      "tags": ["reporting", "disclosure", "intake"],
+      "inflections": {
+        "adjective": "whistleblower-reported",
+        "noun": "whistleblower reporting"
+      }
+    },
+    {
+      "term_id": "eth_rel_bribing",
+      "term": "corruptly-influencing",
+      "type": "relationship",
+      "domain": "business_ethics",
+      "subject": "anticorruption_and_trade_integrity",
+      "topic": "fcpa_anti_bribery_prohibitions",
+      "tags": ["fcpa", "bribery", "prohibited"],
+      "inflections": {
+        "adjective": "corrupt",
+        "noun": "corrupt influence"
+      }
+    },
+    {
+      "term_id": "eth_rel_self_dealing",
+      "term": "self-dealing",
+      "type": "relationship",
+      "domain": "business_ethics",
+      "subject": "corporate_governance_and_fiduciary_duties",
+      "topic": "duty_of_loyalty_and_care",
+      "tags": ["fiduciary", "loyalty", "conflict_of_interest"],
+      "inflections": {
+        "adjective": "self-dealing",
+        "noun": "self-dealing"
+      }
+    },
+    {
+      "term_id": "eth_rel_clawing_back",
+      "term": "compensation-clawing-back",
+      "type": "relationship",
+      "domain": "business_ethics",
+      "subject": "corporate_governance_and_fiduciary_duties",
+      "topic": "executive_compensation_clawbacks",
+      "tags": ["remedial", "executive", "compensation"],
+      "inflections": {
+        "adjective": "clawback-triggering",
+        "noun": "clawback enforcement"
+      }
+    },
+    {
+      "term_id": "eth_rel_greenwashing",
+      "term": "deceptively-marketing",
+      "type": "relationship",
+      "domain": "business_ethics",
+      "subject": "environmental_social_governance_and_supply_chain",
+      "topic": "greenwashing_and_esg_metrics_verification",
+      "tags": ["esg", "misrepresentation", "disclosure"],
+      "inflections": {
+        "adjective": "greenwashing",
+        "noun": "greenwashing misrepresentation"
+      }
+    },
+    {
+      "term_id": "eth_rel_retaliating",
+      "term": "retaliating",
+      "type": "relationship",
+      "domain": "business_ethics",
+      "subject": "workplace_ethics_and_whistleblower_systems",
+      "topic": "anti_retaliation_monitoring_and_remedies",
+      "tags": ["adverse_action", "unlawful", "workplace"],
+      "inflections": {
+        "adjective": "retaliatory",
+        "noun": "retaliation"
+      }
+    },
+    {
+      "term_id": "eth_rel_diligencing",
+      "term": "due-diligencing",
+      "type": "relationship",
+      "domain": "business_ethics",
+      "subject": "anticorruption_and_trade_integrity",
+      "topic": "third_party_intermediary_due_diligence",
+      "tags": ["preventive", "vetting", "compliance"],
+      "inflections": {
+        "adjective": "due-diligence",
+        "noun": "due diligence"
+      }
+    },
+    {
+      "term_id": "eth_rel_restating_financials",
+      "term": "financial-restating",
+      "type": "relationship",
+      "domain": "business_ethics",
+      "subject": "accounting_integrity_and_financial_reporting",
+      "topic": "financial_restatements_and_disclosures",
+      "tags": ["accounting", "remedial", "disclosure"],
+      "inflections": {
+        "adjective": "restatement-necessitating",
+        "noun": "financial restatement"
+      }
+    },
+    {
+      "term_id": "eth_ent_whistleblower_tip",
+      "term": "confidential hotline intake submission",
+      "type": "entity",
+      "domain": "business_ethics",
+      "subject": "workplace_ethics_and_whistleblower_systems",
+      "topic": "whistleblower_hotline_intake_and_triage",
+      "tags": ["intake", "hotline", "whistleblower_record"],
+      "inflections": {
+        "singular": "confidential hotline intake submission",
+        "plural": "confidential hotline intake submissions"
+      }
+    },
+    {
+      "term_id": "eth_ent_sox_subcertification",
+      "term": "SOX Section 302 sub-certification",
+      "type": "entity",
+      "domain": "business_ethics",
+      "subject": "accounting_integrity_and_financial_reporting",
+      "topic": "sox_internal_control_assessments",
+      "tags": ["financial", "certification", "statutory_record"],
+      "inflections": {
+        "singular": "SOX Section 302 sub-certification",
+        "plural": "SOX Section 302 sub-certifications"
+      }
+    },
+    {
+      "term_id": "eth_ent_intermediary_screening_report",
+      "term": "third-party intermediary background vetting dossier",
+      "type": "entity",
+      "domain": "business_ethics",
+      "subject": "anticorruption_and_trade_integrity",
+      "topic": "third_party_intermediary_due_diligence",
+      "tags": ["due_diligence", "fcpa", "screening"],
+      "inflections": {
+        "singular": "third-party intermediary background vetting dossier",
+        "plural": "third-party intermediary background vetting dossiers"
+      }
+    },
+    {
+      "term_id": "eth_ent_esg_assurance_statement",
+      "term": "independent ESG assurance verification report",
+      "type": "entity",
+      "domain": "business_ethics",
+      "subject": "environmental_social_governance_and_supply_chain",
+      "topic": "greenwashing_and_esg_metrics_verification",
+      "tags": ["sustainability", "audit", "assurance"],
+      "inflections": {
+        "singular": "independent ESG assurance verification report",
+        "plural": "independent ESG assurance verification reports"
+      }
+    },
+    {
+      "term_id": "eth_ent_special_committee_investigation",
+      "term": "independent special committee investigative report",
+      "type": "entity",
+      "domain": "business_ethics",
+      "subject": "corporate_governance_and_fiduciary_duties",
+      "topic": "board_oversight_and_caremark_claims",
+      "tags": ["board", "investigative", "governance"],
+      "inflections": {
+        "singular": "independent special committee investigative report",
+        "plural": "independent special committee investigative reports"
+      }
+    },
+    {
+      "term_id": "eth_ent_clawback_notice",
+      "term": "incentive compensation clawback demand letter",
+      "type": "entity",
+      "domain": "business_ethics",
+      "subject": "corporate_governance_and_fiduciary_duties",
+      "topic": "executive_compensation_clawbacks",
+      "tags": ["clawback", "executive", "formal_notice"],
+      "inflections": {
+        "singular": "incentive compensation clawback demand letter",
+        "plural": "incentive compensation clawback demand letters"
+      }
+    },
+    {
+      "term_id": "eth_ent_supply_chain_audit",
+      "term": "supplier forced labor traceability audit",
+      "type": "entity",
+      "domain": "business_ethics",
+      "subject": "environmental_social_governance_and_supply_chain",
+      "topic": "supply_chain_human_rights_due_diligence",
+      "tags": ["human_rights", "supply_chain", "audit"],
+      "inflections": {
+        "singular": "supplier forced labor traceability audit",
+        "plural": "supplier forced labor traceability audits"
+      }
+    },
+    {
+      "term_id": "eth_tgt_foreign_official_bribe",
+      "term": "an improper value transfer to a foreign government official",
+      "type": "target",
+      "domain": "business_ethics",
+      "subject": "anticorruption_and_trade_integrity",
+      "topic": "fcpa_anti_bribery_prohibitions",
+      "tags": ["fcpa", "bribery", "corrupt_intent"]
+    },
+    {
+      "term_id": "eth_tgt_channel_stuffing",
+      "term": "a premature revenue recognition channel-stuffing scheme",
+      "type": "target",
+      "domain": "business_ethics",
+      "subject": "accounting_integrity_and_financial_reporting",
+      "topic": "revenue_recognition_fraud_detection",
+      "tags": ["accounting_fraud", "earnings_manipulation"]
+    },
+    {
+      "term_id": "eth_tgt_caremark_failure",
+      "term": "a systemic failure of board-level compliance monitoring",
+      "type": "target",
+      "domain": "business_ethics",
+      "subject": "corporate_governance_and_fiduciary_duties",
+      "topic": "board_oversight_and_caremark_claims",
+      "tags": ["caremark", "oversight_failure", "fiduciary_breach"]
+    },
+    {
+      "term_id": "eth_tgt_whistleblower_discharge",
+      "term": "a retaliatory discharge of a reporting employee",
+      "type": "target",
+      "domain": "business_ethics",
+      "subject": "workplace_ethics_and_whistleblower_systems",
+      "topic": "anti_retaliation_monitoring_and_remedies",
+      "tags": ["retaliation", "wrongful_termination"]
+    },
+    {
+      "term_id": "eth_tgt_misleading_climate_claim",
+      "term": "an unsubstantiated net-zero marketing assertion",
+      "type": "target",
+      "domain": "business_ethics",
+      "subject": "environmental_social_governance_and_supply_chain",
+      "topic": "greenwashing_and_esg_metrics_verification",
+      "tags": ["greenwashing", "misrepresentation", "climate"]
+    },
+    {
+      "term_id": "eth_tgt_related_party_siphoning",
+      "term": "an undisclosed related-party real estate lease agreement",
+      "type": "target",
+      "domain": "business_ethics",
+      "subject": "corporate_governance_and_fiduciary_duties",
+      "topic": "related_party_transactions",
+      "tags": ["self_dealing", "disclosure_omission"]
+    },
+    {
+      "term_id": "eth_rf_fcpa",
+      "term": "the Foreign Corrupt Practices Act (15 U.S.C. § 78dd-1 et seq.)",
+      "type": "regulatory_framework",
+      "domain": "business_ethics",
+      "subject": "anticorruption_and_trade_integrity",
+      "topic": "fcpa_anti_bribery_prohibitions",
+      "tags": ["statutory", "anti_bribery", "federal"]
+    },
+    {
+      "term_id": "eth_rf_sox",
+      "term": "the Sarbanes-Oxley Act of 2002",
+      "type": "regulatory_framework",
+      "domain": "business_ethics",
+      "subject": "accounting_integrity_and_financial_reporting",
+      "topic": "sox_internal_control_assessments",
+      "tags": ["statutory", "accounting", "federal"]
+    },
+    {
+      "term_id": "eth_rf_dodd_frank_clawback",
+      "term": "SEC Rule 10D-1 (Dodd-Frank Clawback Mandate)",
+      "type": "regulatory_framework",
+      "domain": "business_ethics",
+      "subject": "corporate_governance_and_fiduciary_duties",
+      "topic": "executive_compensation_clawbacks",
+      "tags": ["sec_rule", "clawback", "listing_standards"]
+    },
+    {
+      "term_id": "eth_rf_uflpa",
+      "term": "the Uyghur Forced Labor Prevention Act (UFLPA)",
+      "type": "regulatory_framework",
+      "domain": "business_ethics",
+      "subject": "environmental_social_governance_and_supply_chain",
+      "topic": "supply_chain_human_rights_due_diligence",
+      "tags": ["trade", "human_rights", "supply_chain"]
+    },
+    {
+      "term_id": "eth_rf_federal_sentencing_guidelines",
+      "term": "Chapter 8 of the Federal Sentencing Guidelines for Organizations",
+      "type": "regulatory_framework",
+      "domain": "business_ethics",
+      "subject": "workplace_ethics_and_whistleblower_systems",
+      "topic": "code_of_conduct_violation_investigation",
+      "tags": ["sentencing", "compliance_program_standards"]
+    },
+    {
+      "term_id": "eth_gb_audit_committee",
+      "term": "the Board Audit Committee",
+      "type": "governance_body",
+      "domain": "business_ethics",
+      "subject": "accounting_integrity_and_financial_reporting",
+      "topic": "independent_audit_committee_oversight",
+      "tags": ["board", "independent_directors", "financial_oversight"],
+      "inflections": {
+        "singular": "Board Audit Committee",
+        "article": "the Board Audit Committee"
+      }
+    },
+    {
+      "term_id": "eth_gb_special_litigation_committee",
+      "term": "an Independent Special Litigation Committee",
+      "type": "governance_body",
+      "domain": "business_ethics",
+      "subject": "corporate_governance_and_fiduciary_duties",
+      "topic": "shareholder_derivative_actions",
+      "tags": ["board", "independent", "derivative_action"],
+      "inflections": {
+        "singular": "Independent Special Litigation Committee",
+        "article": "an Independent Special Litigation Committee"
+      }
+    },
+    {
+      "term_id": "eth_gb_chief_compliance_officer",
+      "term": "the Chief Compliance Officer",
+      "type": "governance_body",
+      "domain": "business_ethics",
+      "subject": "workplace_ethics_and_whistleblower_systems",
+      "topic": "whistleblower_hotline_intake_and_triage",
+      "tags": ["management", "compliance_executive"],
+      "inflections": {
+        "singular": "Chief Compliance Officer",
+        "article": "the Chief Compliance Officer"
+      }
+    },
+    {
+      "term_id": "eth_gb_esg_steering_committee",
+      "term": "the Corporate Sustainability and ESG Committee",
+      "type": "governance_body",
+      "domain": "business_ethics",
+      "subject": "environmental_social_governance_and_supply_chain",
+      "topic": "greenwashing_and_esg_metrics_verification",
+      "tags": ["board", "sustainability", "oversight"],
+      "inflections": {
+        "singular": "Corporate Sustainability and ESG Committee",
+        "article": "the Corporate Sustainability and ESG Committee"
+      }
+    }
+  ],
+  "constraints": [
+    {
+      "type": "domain_alignment"
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "eth_rel_bribing"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "eth_tgt_foreign_official_bribe"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "eth_rel_clawing_back"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "eth_ent_clawback_notice"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "eth_rel_clawing_back"
+      },
+      "then": {
+        "slot": "regulatory_framework",
+        "values": [
+          "eth_rf_dodd_frank_clawback"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "eth_rel_greenwashing"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "eth_tgt_misleading_climate_claim"
+        ]
+      }
+    },
+    {
+      "type": "excludes",
+      "if": {
+        "slot": "relationship",
+        "value": "eth_rel_bribing"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "eth_ent_esg_assurance_statement",
+          "eth_ent_clawback_notice"
+        ]
+      }
+    }
+  ]
+}
+ 

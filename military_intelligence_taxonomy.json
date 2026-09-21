@@ -1,0 +1,515 @@
+{
+  "domain": "military_intelligence",
+  "version": "2.0.0",
+  "scope_note": "A domain ontology and taxonomy mapping the intelligence cycle, multi-source intelligence disciplines (INTs), collection management, threat modeling, all-source fusion, target development, and counterintelligence.",
+  "subjects": {
+    "collection_disciplines": {
+      "description": "Tasking, collection, and exploitation across technical and human intelligence domains (GEOINT, SIGINT, HUMINT, OSINT, MASINT).",
+      "topics": [
+        "signals_intelligence_interception",
+        "geospatial_imagery_exploitation",
+        "human_source_clandestine_collection",
+        "open_source_telemetry_harvesting",
+        "measurement_and_signature_surveillance"
+      ]
+    },
+    "all_source_analysis_and_fusion": {
+      "description": "Integration, evaluation, and synthesis of disparate multi-INT feeds into finished intelligence products.",
+      "topics": [
+        "threat_actor_attribution",
+        "order_of_battle_reconstruction",
+        "indication_and_warning_thresholds",
+        "structured_analytic_techniques",
+        "course_of_action_forecasting"
+      ]
+    },
+    "target_intelligence_and_weaponeering": {
+      "description": "Target system analysis, coordinate verification, collateral damage estimation, and joint targeting cycles.",
+      "topics": [
+        "target_system_analysis",
+        "coordinate_mensuration_and_validation",
+        "collateral_damage_estimation",
+        "high_value_individual_tracking",
+        "physical_and_functional_damage_assessment"
+      ]
+    },
+    "counterintelligence_and_security": {
+      "description": "Detecting, identifying, exploiting, and neutralizing foreign intelligence entity (FIE) activities and insider threats.",
+      "topics": [
+        "insider_threat_anomaly_detection",
+        "foreign_intelligence_penetration_auditing",
+        "deception_detection_and_analysis",
+        "counter_surveillance_tradecraft",
+        "sensitive_compartmented_security_audits"
+      ]
+    },
+    "collection_management_and_dissemination": {
+      "description": "Requirements prioritization, collection deck scheduling, sensor-to-analyst routing, and dissemination protocols.",
+      "topics": [
+        "priority_intelligence_requirements_tracking",
+        "sensor_allocation_and_tasking",
+        "multi_agency_federated_sharing",
+        "tearline_sanitization_and_declassification",
+        "collection_posture_gap_analysis"
+      ]
+    }
+  },
+  "slots": {
+    "relationship": {
+      "slot_id": "relationship",
+      "semantic_role": "analytic_or_collection_relation",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["relationship"],
+        "domain_scope": ["military_intelligence", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "entity": {
+      "slot_id": "entity",
+      "semantic_role": "intel_report_sensor_or_artifact",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["entity"],
+        "domain_scope": ["military_intelligence", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "target": {
+      "slot_id": "target",
+      "semantic_role": "focal_intelligence_subject_or_target",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["target"],
+        "domain_scope": ["military_intelligence", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "classification_level": {
+      "slot_id": "classification_level",
+      "semantic_role": "dissemination_and_handling_caveat",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["classification_level"],
+        "domain_scope": ["military_intelligence", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    },
+    "analytic_confidence": {
+      "slot_id": "analytic_confidence",
+      "semantic_role": "evaluative_confidence_level",
+      "default_cardinality": "single",
+      "acceptor": {
+        "allowed_types": ["analytic_confidence"],
+        "domain_scope": ["military_intelligence", "*"],
+        "subject_scope": ["*"],
+        "topic_scope": ["*"],
+        "required_tags": [],
+        "excluded_tags": []
+      }
+    }
+  },
+  "templates": [
+    {
+      "template_id": "mi_interrogative_core",
+      "pattern": "What {relationship} {entity:plural} relate to {target} [at {classification_level}]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["classification_level"]
+    },
+    {
+      "template_id": "mi_confidence_diagnostic",
+      "pattern": "Which {entity:plural} provide {analytic_confidence} confidence in a {relationship} nexus with {target}?",
+      "required_slots": ["relationship", "entity", "target", "analytic_confidence"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "mi_analytic_synthesis",
+      "pattern": "How do {relationship} {entity:plural} evaluate {target} under {classification_level} dissemination caveats?",
+      "required_slots": ["relationship", "entity", "target", "classification_level"],
+      "optional_slots": []
+    },
+    {
+      "template_id": "mi_collection_correlation",
+      "pattern": "What {relationship} {entity:plural} corroborate {target} [with {analytic_confidence} confidence]?",
+      "required_slots": ["relationship", "entity", "target"],
+      "optional_slots": ["analytic_confidence"]
+    }
+  ],
+  "vocabulary": [
+    {
+      "term_id": "mi_rel_intercepting",
+      "term": "intercepting",
+      "type": "relationship",
+      "domain": "military_intelligence",
+      "subject": "collection_disciplines",
+      "topic": "signals_intelligence_interception",
+      "tags": ["sigint", "collection", "technical"],
+      "inflections": {
+        "adjective": "intercept-derived",
+        "noun": "interception"
+      }
+    },
+    {
+      "term_id": "mi_rel_corroborating",
+      "term": "corroborating",
+      "type": "relationship",
+      "domain": "military_intelligence",
+      "subject": "all_source_analysis_and_fusion",
+      "topic": "structured_analytic_techniques",
+      "tags": ["fusion", "verification", "analytic"],
+      "inflections": {
+        "adjective": "corroborative",
+        "noun": "corroboration"
+      }
+    },
+    {
+      "term_id": "mi_rel_mensurating",
+      "term": "mensurating",
+      "type": "relationship",
+      "domain": "military_intelligence",
+      "subject": "target_intelligence_and_weaponeering",
+      "topic": "coordinate_mensuration_and_validation",
+      "tags": ["geoint", "targeting", "precision"],
+      "inflections": {
+        "adjective": "mensurated",
+        "noun": "mensuration"
+      }
+    },
+    {
+      "term_id": "mi_rel_deceiving",
+      "term": "deceiving",
+      "type": "relationship",
+      "domain": "military_intelligence",
+      "subject": "counterintelligence_and_security",
+      "topic": "deception_detection_and_analysis",
+      "tags": ["counterintelligence", "adversarial", "anomaly"],
+      "inflections": {
+        "adjective": "deceptive",
+        "noun": "deception"
+      }
+    },
+    {
+      "term_id": "mi_rel_forecasting",
+      "term": "forecasting",
+      "type": "relationship",
+      "domain": "military_intelligence",
+      "subject": "all_source_analysis_and_fusion",
+      "topic": "course_of_action_forecasting",
+      "tags": ["predictive", "estimating", "strategic"],
+      "inflections": {
+        "adjective": "predictive",
+        "noun": "forecast"
+      }
+    },
+    {
+      "term_id": "mi_rel_sanitizing",
+      "term": "sanitizing",
+      "type": "relationship",
+      "domain": "military_intelligence",
+      "subject": "collection_management_and_dissemination",
+      "topic": "tearline_sanitization_and_declassification",
+      "tags": ["dissemination", "security", "tearline"],
+      "inflections": {
+        "adjective": "sanitized",
+        "noun": "sanitization"
+      }
+    },
+    {
+      "term_id": "mi_rel_exploiting_source",
+      "term": "source-exploiting",
+      "type": "relationship",
+      "domain": "military_intelligence",
+      "subject": "collection_disciplines",
+      "topic": "human_source_clandestine_collection",
+      "tags": ["humint", "operational", "collection"],
+      "inflections": {
+        "adjective": "source-exploiting",
+        "noun": "source exploitation"
+      }
+    },
+    {
+      "term_id": "mi_ent_sigint_report",
+      "term": "SIGINT technical report",
+      "type": "entity",
+      "domain": "military_intelligence",
+      "subject": "collection_disciplines",
+      "topic": "signals_intelligence_interception",
+      "tags": ["raw_intel", "technical", "intercept"],
+      "inflections": {
+        "singular": "SIGINT technical report",
+        "plural": "SIGINT technical reports"
+      }
+    },
+    {
+      "term_id": "mi_ent_geoint_product",
+      "term": "synthetic aperture radar imagery product",
+      "type": "entity",
+      "domain": "military_intelligence",
+      "subject": "collection_disciplines",
+      "topic": "geospatial_imagery_exploitation",
+      "tags": ["imagery", "sar", "sensor_data"],
+      "inflections": {
+        "singular": "synthetic aperture radar imagery product",
+        "plural": "synthetic aperture radar imagery products"
+      }
+    },
+    {
+      "term_id": "mi_ent_intelligence_estimate",
+      "term": "National Intelligence Estimate",
+      "type": "entity",
+      "domain": "military_intelligence",
+      "subject": "all_source_analysis_and_fusion",
+      "topic": "course_of_action_forecasting",
+      "tags": ["finished_intel", "strategic", "fusion"],
+      "inflections": {
+        "singular": "National Intelligence Estimate",
+        "plural": "National Intelligence Estimates"
+      }
+    },
+    {
+      "term_id": "mi_ent_target_folder",
+      "term": "electronic target folder",
+      "type": "entity",
+      "domain": "military_intelligence",
+      "subject": "target_intelligence_and_weaponeering",
+      "topic": "target_system_analysis",
+      "tags": ["targeting", "weaponeering", "dossier"],
+      "inflections": {
+        "singular": "electronic target folder",
+        "plural": "electronic target folders"
+      }
+    },
+    {
+      "term_id": "mi_ent_ci_inquiry",
+      "term": "counterintelligence damage assessment",
+      "type": "entity",
+      "domain": "military_intelligence",
+      "subject": "counterintelligence_and_security",
+      "topic": "foreign_intelligence_penetration_auditing",
+      "tags": ["investigation", "counterintelligence", "security"],
+      "inflections": {
+        "singular": "counterintelligence damage assessment",
+        "plural": "counterintelligence damage assessments"
+      }
+    },
+    {
+      "term_id": "mi_ent_pir_matrix",
+      "term": "priority intelligence requirement collection deck",
+      "type": "entity",
+      "domain": "military_intelligence",
+      "subject": "collection_management_and_dissemination",
+      "topic": "priority_intelligence_requirements_tracking",
+      "tags": ["collection_management", "tasking", "requirements"],
+      "inflections": {
+        "singular": "priority intelligence requirement collection deck",
+        "plural": "priority intelligence requirement collection decks"
+      }
+    },
+    {
+      "term_id": "mi_ent_humint_raw_cable",
+      "term": "intelligence information report (IIR)",
+      "type": "entity",
+      "domain": "military_intelligence",
+      "subject": "collection_disciplines",
+      "topic": "human_source_clandestine_collection",
+      "tags": ["humint", "raw_intel", "field_cable"],
+      "inflections": {
+        "singular": "intelligence information report (IIR)",
+        "plural": "intelligence information reports (IIRs)"
+      }
+    },
+    {
+      "term_id": "mi_tgt_mobile_launcher",
+      "term": "a road-mobile ballistic missile erector",
+      "type": "target",
+      "domain": "military_intelligence",
+      "subject": "target_intelligence_and_weaponeering",
+      "topic": "high_value_individual_tracking",
+      "tags": ["high_payoff_target", "time_sensitive", "relocatable"]
+    },
+    {
+      "term_id": "mi_tgt_underground_enrichment",
+      "term": "a subterranean centrifuge cascade hall",
+      "type": "target",
+      "domain": "military_intelligence",
+      "subject": "target_intelligence_and_weaponeering",
+      "topic": "target_system_analysis",
+      "tags": ["hardened_facility", "strategic_asset", "wmd"]
+    },
+    {
+      "term_id": "mi_tgt_coastal_surveillance",
+      "term": "an over-the-horizon maritime radar network",
+      "type": "target",
+      "domain": "military_intelligence",
+      "subject": "collection_disciplines",
+      "topic": "signals_intelligence_interception",
+      "tags": ["electronic_order_of_battle", "radar", "coastal"]
+    },
+    {
+      "term_id": "mi_tgt_insider_compromise",
+      "term": "an unauthorized exfiltration of SCI network holdings",
+      "type": "target",
+      "domain": "military_intelligence",
+      "subject": "counterintelligence_and_security",
+      "topic": "insider_threat_anomaly_detection",
+      "tags": ["insider_threat", "compromise", "espionage"]
+    },
+    {
+      "term_id": "mi_tgt_adversary_command",
+      "term": "an adversary operational theatre joint staff",
+      "type": "target",
+      "domain": "military_intelligence",
+      "subject": "all_source_analysis_and_fusion",
+      "topic": "order_of_battle_reconstruction",
+      "tags": ["c2_node", "order_of_battle", "leadership"]
+    },
+    {
+      "term_id": "mi_tgt_denial_deception_site",
+      "term": "a decoy surface-to-air missile position",
+      "type": "target",
+      "domain": "military_intelligence",
+      "subject": "counterintelligence_and_security",
+      "topic": "deception_detection_and_analysis",
+      "tags": ["camouflet", "deception", "decoy"]
+    },
+    {
+      "term_id": "mi_cls_unclassified_fouo",
+      "term": "CUI // REL TO FVEY",
+      "type": "classification_level",
+      "domain": "military_intelligence",
+      "subject": "collection_management_and_dissemination",
+      "topic": "tearline_sanitization_and_declassification",
+      "tags": ["handling_caveat", "controlled_unclassified"]
+    },
+    {
+      "term_id": "mi_cls_secret_rel",
+      "term": "SECRET // NOFORN",
+      "type": "classification_level",
+      "domain": "military_intelligence",
+      "subject": "collection_management_and_dissemination",
+      "topic": "tearline_sanitization_and_declassification",
+      "tags": ["handling_caveat", "secret"]
+    },
+    {
+      "term_id": "mi_cls_top_secret_sci",
+      "term": "TOP SECRET // SI / TK // NOFORN",
+      "type": "classification_level",
+      "domain": "military_intelligence",
+      "subject": "counterintelligence_and_security",
+      "topic": "sensitive_compartmented_security_audits",
+      "tags": ["handling_caveat", "sci", "compartmented"]
+    },
+    {
+      "term_id": "mi_conf_high",
+      "term": "high",
+      "type": "analytic_confidence",
+      "domain": "military_intelligence",
+      "subject": "all_source_analysis_and_fusion",
+      "topic": "structured_analytic_techniques",
+      "tags": ["analytic_standard", "high_confidence"]
+    },
+    {
+      "term_id": "mi_conf_moderate",
+      "term": "moderate",
+      "type": "analytic_confidence",
+      "domain": "military_intelligence",
+      "subject": "all_source_analysis_and_fusion",
+      "topic": "structured_analytic_techniques",
+      "tags": ["analytic_standard", "moderate_confidence"]
+    },
+    {
+      "term_id": "mi_conf_low",
+      "term": "low",
+      "type": "analytic_confidence",
+      "domain": "military_intelligence",
+      "subject": "all_source_analysis_and_fusion",
+      "topic": "structured_analytic_techniques",
+      "tags": ["analytic_standard", "low_confidence"]
+    }
+  ],
+  "constraints": [
+    {
+      "type": "domain_alignment"
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "mi_rel_intercepting"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "mi_ent_sigint_report"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "mi_rel_mensurating"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "mi_ent_geoint_product",
+          "mi_ent_target_folder"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "mi_rel_exploiting_source"
+      },
+      "then": {
+        "slot": "entity",
+        "values": [
+          "mi_ent_humint_raw_cable"
+        ]
+      }
+    },
+    {
+      "type": "requires",
+      "if": {
+        "slot": "relationship",
+        "value": "mi_rel_sanitizing"
+      },
+      "then": {
+        "slot": "classification_level",
+        "values": [
+          "mi_cls_unclassified_fouo",
+          "mi_cls_secret_rel"
+        ]
+      }
+    },
+    {
+      "type": "excludes",
+      "if": {
+        "slot": "relationship",
+        "value": "mi_rel_intercepting"
+      },
+      "then": {
+        "slot": "target",
+        "values": [
+          "mi_tgt_underground_enrichment"
+        ]
+      }
+    }
+  ]
+}
+
